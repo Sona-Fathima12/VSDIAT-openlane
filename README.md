@@ -1,5 +1,5 @@
 # VSDIAT Openlane Sky130 Workshop
-## Sky130 Day1- Inception of open-source EDA, OpenLANE and Sky130 PDK  
+### Sky130 Day1- Inception of open-source EDA, OpenLANE and Sky130 PDK  
      
 ## How to talk to computers
 ## 0- Introduction to QFN-48 Package, chip, pads, core, die and IPs
@@ -107,7 +107,7 @@ The Oklahoma State University (OSU) team achieved 327 MHz post-layout clock freq
 A pipelined version could exceed 1 GHz, further demonstrating the node’s capability.
 
 
-## Simplified RTL2GDS flow
+## 4-Simplified RTL2GDS flow
 
 ![WhatsApp Image 2025-06-13 at 11 19 23 PM](https://github.com/user-attachments/assets/177ae6d6-530f-4100-9537-57e9bba520f0)
 
@@ -165,3 +165,13 @@ It includes signal routing (connecting logic) and power routing (VDD and GND lin
 
 **Step 6: Sign off** :ignoff is the final stage in the chip design flow where the design is thoroughly checked for correctness and readiness for fabrication.It includes critical checks like timing analysis, power analysis, signal integrity, DRC (Design Rule Check), and LVS (Layout vs. Schematic).These checks ensure the design meets all functional, electrical, and physical requirements.
 
+
+## 5-Introduction to OpenLane and Strive chipsets
+
+OpenLANE is an open-source, automated flow that converts a digital design (written in RTL) into a physical chip layout (GDSII format) using a collection of tools like OpenROAD, Yosys, Magic, Netgen, and others. It is designed to run without human help in between steps (no-human-in-the-loop), and its main goal is to create a "clean" GDSII — meaning the final layout has no errors in layout vs. schematic (LVS), no design rule check (DRC) violations, and no timing issues. OpenLANE supports the SkyWater 130nm open PDK and is used to create SoCs (System-on-Chips) through a fully open-source environment. The striVe family of SoCs was built using OpenLANE and includes different versions with various RAM configurations and design modules.
+
+OpenLANE supports two operation modes: Autonomous, where everything runs automatically with a push of a button, and Interactive, where each design step is done manually for better control and learning. It includes 43 example designs, each with optimal settings, to help users understand and experiment with the design flow. The striVe SoC family includes variants like striVe 1, 2, 2a, 3, 5, and 6, each offering different memory setups and testing features. Overall, OpenLANE makes chip design more accessible, especially for students and researchers, by offering a complete and open platform from RTL to GDSII.
+
+## 6-Introduction to OpenLane and detailed ASIC design FLOW
+
+## Get familiar to open-source EDA tools
