@@ -174,4 +174,18 @@ OpenLANE supports two operation modes: Autonomous, where everything runs automat
 
 ## 6-Introduction to OpenLane and detailed ASIC design FLOW
 
-## Get familiar to open-source EDA tools
+
+OpenLANE includes a design exploration utility that is also used for regression testing. In this process, OpenLANE is run on around 70 designs to make sure everything is working correctly. The results are compared with the best-known previous results to confirm that recent changes have not caused any performance or quality issues.
+
+Design for Test (DFT) is a step that ensures the chip can be tested after manufacturing. It includes several tasks such as scan insertion, automatic test pattern generation, pattern compaction, fault coverage measurement, and fault simulation. These help in detecting defects in the final silicon chip.
+
+After DFT, physical implementation is done using the OpenROAD tools. The major steps include floor and power planning, adding decoupling capacitors and tap cells, global and detailed placement of components, post-placement optimization, clock tree synthesis (CTS), and global and detailed routing. These steps physically arrange and connect the circuit on the chip.
+
+Since CTS and post-placement optimization change the netlist, it is important to verify that the design's logic remains the same. This is done using the LCE tool in Yosys, which performs formal verification to ensure that the functional behavior has not changed due to netlist modifications.
+
+During chip fabrication, metal wires can act as antennas and collect charge, which may damage transistor gates. This is called an antenna rule violation. To fix it, we can either bridge the wire to a higher metal layer or add antenna diode cells to release the charge. OpenLANE uses a preventive method by placing fake antenna diode cells next to every cell input after placement. If the antenna checker detects a real violation, these fake diodes are replaced with actual diode cells.
+
+Static Timing Analysis (STA) checks if the chip design meets timing requirements. This involves extracting resistance and capacitance information from the layout using DEF2SPEF, then running STA with the OpenSTA tool. Any timing violations are reported for correction.
+
+Finally, physical verification is performed. Design Rule Checking (DRC) ensures the layout follows manufacturing rules, which is done using Magic. Layout Versus Schematic (LVS) checks that the physical layout matches the circuit logic. This is done using Magic and Netgen, and a SPICE netlist is also extracted from the layout for further analysis.
+
