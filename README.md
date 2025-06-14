@@ -409,12 +409,6 @@ Commands used:
 ![Capture 16](https://github.com/user-attachments/assets/4f7be799-0238-4043-879e-8905a599f35f)
 ![Capture 17](https://github.com/user-attachments/assets/8165d202-a0d9-4416-842d-feb74a117b93)
 
-5.Load generated placement def in magic tool and explore the placement.
-
-Commands used:
-![Capture 18](https://github.com/user-attachments/assets/5bd9de61-a3bc-4456-a9b2-12853fbb6ce8)
-![Capture 19](https://github.com/user-attachments/assets/269048ed-c8bf-4404-97b5-2e79d192b4d7)
-![Capture 20](https://github.com/user-attachments/assets/df167c0a-1627-4dbc-afb7-aa9f1c87579b)
 
 
 
@@ -461,5 +455,27 @@ similar to stage 2, in Stage 3 also we required the buffer between gate2 and FF2
 
 ![image](https://github.com/user-attachments/assets/3e93cc95-abbe-44ac-9cf1-e31f0fa11106)
 
-In st 4, it is big tricky compared to the other three stages. So we have to check that what we have done is correct or not first. for that, We need to do a timing analysis by considering the ideal clocks and according to the data of analysis. We will understand that a placement is correct or not.
+In sEt 4, it is big tricky compared to the other three stages.So here the Din4 cant reach f f1 because of the pre placed cells so a buffer is set there so Din4 can reach the repeaters and then f f 1 and from ff1 to 1. and if we look 1 to 2, it cant be reached that easily because there is a huge distance. So a buffer is placed also we can see that the crisscross with the second set, so we can say that 4th set is in  metal 3 layer set 2 in metal 1 or 2 layer,3rd set in metal layer 4. So we have to check that what we have done is correct or not first. for that, We need to do a timing analysis by considering the ideal clocks and according to the data of analysis. We will understand that a placement is correct or not.
 ![image](https://github.com/user-attachments/assets/6ac084d3-08ac-4da2-a4d3-f060706968d2)
+
+
+## Need for libraries and  characterization
+step 1: logic synthesis: arrangeent of gates that will represent your orginal functionality that you have described usinf RTL.
+step 2: floorplanning: we import the output of logic synthesis that is netlist and decide the size of core and die(depends on the number of gates present in the netlist).
+step 3: Placement: logic cells are placed in chip
+step 4: clock tree synthesis(CTS) : that will take care of clock which reach every clock points.
+step 5: routing : routing means connecting all the components together with metal wires so that signals (data, control, power) can move correctly between them.
+step 6: static timing analysis : to analyse what is setup time ,old time,what is the maximum achieval frequency.
+
+one thing common accross all stages are gates or cells
+
+## LAB DAY 2 (BALANCE)
+5.Load generated placement def in magic tool and explore the placement.
+
+Commands used:
+![Capture 18](https://github.com/user-attachments/assets/5bd9de61-a3bc-4456-a9b2-12853fbb6ce8)
+![Capture 19](https://github.com/user-attachments/assets/269048ed-c8bf-4404-97b5-2e79d192b4d7)
+![Capture 20](https://github.com/user-attachments/assets/df167c0a-1627-4dbc-afb7-aa9f1c87579b)
+
+## Cell design and characterization flow.
+## input for cell design flow
