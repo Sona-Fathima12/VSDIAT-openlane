@@ -375,6 +375,13 @@ We now place the netlist inside the core that was designed earlier and aim to fi
 ![Capture 7](https://github.com/user-attachments/assets/60e4a25f-d59f-4db6-9039-60903646d28e)
 
 Area of die in microns = Die width in microns * die height in microns
+1000 Unit Distance = 1 Micron
+Die width in unit Distance = 660685 - 0 = 660685
+Die height in unit Distance =671405 - 0 = 671405
+Distance in microns = Value in unit Distance / 1000
+Die width in microns = 660685 / 1000 = 660.685 Microns
+Die height in microns = 671405 / 1000 = 671.405 Microns
+Area of Die in microns = 660.685 × 671.405 = 443587.212425 Square Microns
 
 3.Load generated floorplan def in magic tool and explore the floorplan.
 
@@ -408,3 +415,51 @@ Commands used:
 ![Capture 18](https://github.com/user-attachments/assets/5bd9de61-a3bc-4456-a9b2-12853fbb6ce8)
 ![Capture 19](https://github.com/user-attachments/assets/269048ed-c8bf-4404-97b5-2e79d192b4d7)
 ![Capture 20](https://github.com/user-attachments/assets/df167c0a-1627-4dbc-afb7-aa9f1c87579b)
+
+
+
+## Library binding and placement
+## netlist bindind and initial place design
+### placement and routing stage
+
+ step 1: bind netlist with physical cells.
+
+ In practically, while logic symbols like NOT and AND gates are shown with distinct shapes (e.g., triangle for NOT), in physical design, all gates and components are represented as rectangular boxes with specific width and height. Each element in the netlist, including flip-flops and logic gates, is assigned a physical shape and dimension to reflect its real-world layout. This standardization is necessary because symbolic shapes don’t exist physically—so everything is mapped to a box-shaped form to fit into the chip layout accurately.
+
+ ![image](https://github.com/user-attachments/assets/a8f0de85-b172-46a4-aada-754d84aad7be)
+![image](https://github.com/user-attachments/assets/6dcf5eac-396f-4a89-a18c-7424b768426f)
+
+So it is called a library. It has weight and height of each cell. It has timing information of each Gates and required condition of each cells as well. There are two types of libraries based on the shape or size and timing information or delay information.and also the various flavours of same cells are also present.
+
+step 2: placement in floorplan
+
+![image](https://github.com/user-attachments/assets/5074a1b4-23a2-4a63-b69f-525f867b2e14)
+![image](https://github.com/user-attachments/assets/5e115e54-f209-4159-b12f-b008fc67cdb9)
+
+
+after every logic gate and flip-flop from the netlist is assigned a proper shape and size, the next important step is placing these components onto the chip floorplan. The floorplan already contains the defined input and output ports, the netlist describing connectivity, and the physical dimensions of each component. With all this information, we now have a physical representation of each gate, which allows us to start positioning them on the floorplan based on how they are connected logically.
+
+During placement, it is important to ensure that the locations of preplaced cells remain unchanged. These preplaced blocks serve specific roles in the design and must not be moved or overlapped by other cells. Placement must be done carefully so that no cell is positioned over the existing preplaced cells, and all logic gates are placed in a way that maintains the required signal flow. This ensures that logical connections are preserved, timing constraints are met, and signal delays are kept minimal.
+
+Initially, the placement is done in such a way that all gates are located close to their related input and output pins to support better performance. However, upon examining the layout, it is noticed that the distance between FF1 of Stage 4 and input Din4 is longer compared to others. This could potentially impact timing and delay. To address this, optimization of the placement is needed to reduce this distance, thereby improving the overall timing and efficiency of the circuit layout.
+
+step 3:Optimize placment.
+
+It is the solution to the problem of distance in placement area. So we use repeated repeaters are basically buffers that will recondition your original signal that will make a new signal which replicates the original signal and send it again .
+As repeaters  increase area will be loss inside the core.The following pictures I attached are showing the repeaters used in the placement of each set of cells.
+
+In the first set the distance between Din1 and FF 1 is less . The wirelength is less and therfore there is not that much resistance and we can directly connect them together and from ff1 to 1 same there is no any large wirelength so we can connect to the together and similarly 1 to 2 and 2 to FF 2 and ff 2 to Dout1 can be connected without any problem because it has  acceptable wire length and there is no any huge capacitance so they can connected.
+
+![image](https://github.com/user-attachments/assets/a4e7759f-aab3-48e9-94cf-4417102eedcf)
+
+In second set the distance for wirelength is huge. So the capacitance is very high. So we use 2 buffers called  repeaters.But in someparts there is no delay. That means from ff1  to ff2 there is no delay .and after that we can connect ff2 to Dout2
+
+![image](https://github.com/user-attachments/assets/5cedc953-651a-45ca-bb45-fc1470d75cc3)
+
+similar to stage 2, in Stage 3 also we required the buffer between gate2 and FF2.
+
+
+![image](https://github.com/user-attachments/assets/3e93cc95-abbe-44ac-9cf1-e31f0fa11106)
+
+In st 4, it is big tricky compared to the other three stages. So we have to check that what we have done is correct or not first. for that, We need to do a timing analysis by considering the ideal clocks and according to the data of analysis. We will understand that a placement is correct or not.
+![image](https://github.com/user-attachments/assets/6ac084d3-08ac-4da2-a4d3-f060706968d2)
