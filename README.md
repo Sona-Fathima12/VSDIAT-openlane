@@ -656,6 +656,8 @@ Use Mask 11 and photoresist to etch the TiN layer, forming precise contact openi
 ### 8. Higher-Level Metal Formation
 
 
+![image](https://github.com/user-attachments/assets/6a87594f-b3ce-4332-bbe5-c13fb22289d1)
+![image](https://github.com/user-attachments/assets/0659b537-30e2-4d85-9ace-64041d7dcc41)
 
 This stage forms the upper metal layers that connect different parts of the chip.
 
@@ -673,45 +675,48 @@ To solve this, we deposit a thick SiO₂ layer (doped to lower resistivity), and
 
 Now, for the metal contacts:
 
-
-
 Use Mask 12 and photoresist to etch openings in SiO₂.
+
+![image](https://github.com/user-attachments/assets/1acffc5b-2e0f-47f0-9d0b-8c56acf96127)
 
 Deposit a thin layer of TiN (~10 nm). This layer:
 
-Acts as a barrier between silicon and metal
-
-Helps adhesion between metal and oxide
+![image](https://github.com/user-attachments/assets/680fea18-67ba-4fbf-9e58-90cd741a801c)
 
 
+Acts as a barrier between silicon and metalHelps adhesion between metal and oxide.Next, deposit a blanket layer of tungsten (W) to fill the holes.
 
-Next, deposit a blanket layer of tungsten (W) to fill the holes.
+![image](https://github.com/user-attachments/assets/e0e07c0f-8230-4c94-83bc-c5ab3cf0e3fb)
 
 Again, use CMP to planarize the surface. Now, W acts as the contact plug.
 
-
-
-To form the first-level metal interconnects:
-
-Deposit aluminum (Al) layer.
-
-Use Mask 13 and photoresist to etch Al, creating the metal paths using plasma etching.
+![image](https://github.com/user-attachments/assets/4eb1dc38-e3a2-4b46-a9f5-aed4c0d5b58b)
 
 
 
-For the second metal layer:
+To form the first-level metal interconnects:Deposit aluminum (Al) layer.Use Mask 13 and photoresist to etch Al, creating the metal paths using plasma etching.
 
-Repeat similar steps using:
+![image](https://github.com/user-attachments/assets/3b7ac1ec-805c-4eef-9a08-2c2a32bb2a92)
+
+![image](https://github.com/user-attachments/assets/1a1fc989-1c26-48b9-a6b7-296450217f53)
+
+
+For the second metal layer.Repeat similar steps using:
 
 Mask 14 to etch SiO₂
+![image](https://github.com/user-attachments/assets/87e5a023-3eb6-4532-aa56-85befb367b77)
+![image](https://github.com/user-attachments/assets/0fa93393-198f-4f3f-b1c8-dfa2b6472668)
+![image](https://github.com/user-attachments/assets/97c1f0a2-2a1f-4a25-a571-cbd23dcff1b4)
 
 Mask 15 to etch the second Al layer
 
-This second metal layer is thicker for carrying more current.
+![image](https://github.com/user-attachments/assets/4c7e3085-7250-4598-922d-ee70341a8a57)
 
-Finally, we deposit a passivation layer using SiO₂ or Si₃N₄ to protect the chip.
+This second metal layer is thicker for carrying more current.Finally, we deposit a passivation layer using SiO₂ or Si₃N₄ to protect the chip.
 
+![image](https://github.com/user-attachments/assets/96720b9c-1376-4584-b625-bebc24733177)
 
+![image](https://github.com/user-attachments/assets/28051df2-427f-4a7a-b15c-c9e088f24cf7)
 
 
 
