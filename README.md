@@ -479,3 +479,322 @@ Commands used:
 
 ## Cell design and characterization flow.
 ## input for cell design flow
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+37 th
+16-Mask CMOS Process
+
+
+
+CMOS technology is widely used in making integrated circuits. The 16-mask CMOS process uses a sequence of 16 photolithographic masks to pattern different layers of materials on the silicon wafer, creating the complete CMOS structure.
+
+
+
+1.	Selecting a Substrate
+
+Most common substrate used is p type silicon substrate.it has high resistivity(~50ohms),doping level of 10^15 cm^-3 etc.substrate doping should be less than “well” doping. 
+
+This substrate acts as the foundation for all further layers and device structures.
+
+
+
+2.	Creating Active Region for Transistor
+
+(Place where u actually see P and N mos transistors)
+
+Here creates an Isolation between those pockets.for that grow silicon dioxide (40nm) in p type substrate. Deposited a layer of Si3N3 of 80 nm ,identify region of where we have to create the pockets deposit a layer of photorealism of 1um.
+
+ mask is  a ffabrication term.it is used to protect that particular part in photoresist layer when exposed to UV light.
+
+After that wash it out ,we get  this figure 
+
+Then remove the mask and photorealism layer to grow the oxides on the other area
+
+So we put it in an Oxidation furnace (high temperature  9000 degree celcius)it helps to grow the oxide in other area.if we do LOCOS (local oxidation of silicon) process, the exposed sio2 part will grow and bird break also form. This grown sio2 will provide the perfect isolation between two PMOS and NMOS. This is how we protect two transistor communicating with each other.  Next step is to remove the Si3N4 using hot phospheric acid.
+
+
+
+3.	N-Well and P-Well Formation
+
+
+
+Through ion implantation, regions are doped to create n-wells (for PMOS) and p-wells (for NMOS) inside the substrate. This is often done using separate masks.
+
+Here ,we need to protect one area while we create the transistor. Same steps come over here we use mask 2 here.after the process (same as above) we remove the mask and create a p well that is boron is diffused in ptype substrate using a process called ion implantationso it creates a p well and the energy required is similar to 200keV. Boron penetrates oxide layer and it enters to the active area creating p well
+
+
+
+Similar for well, Mask 3 is used and phosphorus is penetrative through oxide layer and creates n well with ion implantation.
+
+Phosphorus is bit heavier than boron so it’s energy is high.
+
+Next we have to diffuse well so it has to occupy almost half of substrate area.now take the whole substrate in to the high temperature furnace (drive in furnace) put in high temperature and for too long time say 1100 degree celcius for 4 to 6 hours  and it creates yhe clear well.it is alled twin tub process.
+
+
+
+
+
+4.	Create a Gate
+
+
+
+The gate terminal is the most important part of both PMOS and NMOS transistors because it controls whether the transistor turns on or off. This control is based on something called the threshold voltage—the voltage at which the transistor starts to conduct.
+
+
+
+The threshold voltage depends on a few things, especially the doping concentration and the oxide capacitance under the gate. So, before building the full gate structure, we first adjust the doping in that region.
+
+
+
+To do this, we use Mask 4 to mark the area, and then we perform ion implantation using boron ions (for p-type doping). These ions are implanted at a low energy level (around 60 keV) to precisely control the doping near the gate.
+
+
+
+A thin gate oxide layer is grown, and a polysilicon layer is deposited and patterned to form the gate. The gate acts as a control switch for the transistor.
+
+Same process we will repeat for N-well also by using mask 5 and Arsenic ion.
+
+The next important step is to form a clean and high-quality oxide layer for the gate. But before we do that, we need to remove the existing oxide layer, because it may have been damaged during earlier steps like ion implantation.
+
+
+
+To remove the damaged oxide, we use a chemical solution of HF (hydrofluoric acid). After cleaning, we grow a fresh oxide layer on the surface. This new layer has the same thickness but is much better in quality, which is important for reliable transistor operation.
+
+
+
+After that, we deposit a layer of polysilicon on top of the new oxide. This polysilicon contains extra impurities to reduce its electrical resistance, making it a good material for the gate terminal.
+
+
+
+Finally, we use Mask 6 along with photoresist to etch and shape the polysilicon, leaving it only where the gate should be.After etching, remove the photoresist and gate terminal looks like,
+
+
+
+
+
+5) Lightly Doped Drain (LDD) Formation
+
+
+
+In this step, we shape the doping near the gate to protect the transistor from unwanted effects like:
+
+
+
+Hot electron effect
+
+
+
+Short channel effect
+
+
+
+
+
+For PMOS, we need a P+, P−, and N doping profile.
+
+For NMOS, we need an N+, N−, and P doping profile.
+
+
+
+So we do light ion implantation:
+
+
+
+In the P-well (for NMOS), we use Mask 7 and implant phosphorus to create N− regions.
+
+
+
+In the N-well (for PMOS), we use Mask 8 and implant boron to create P− regions.
+
+
+
+
+
+To protect these lightly doped regions, we form spacers beside the gate.
+
+We deposit a thick layer of SiO₂ or Si₃N₄ over the gate and then use plasma anisotropic etching to form the sidewall spacers.
+
+
+
+These spacers help define and shield the area during the next heavy doping step.
+
+
+
+
+
+
+
+6) Source and Drain Formation
+
+
+
+Now we create the source and drain of the transistors.
+
+
+
+First, we deposit a thin screen oxide layer. This layer helps avoid ion channeling during implantation.
+
+
+
+
+
+Then we do heavy ion implantation:
+
+
+
+In the P-well (PMOS):
+
+Use Mask 9 and implant arsenic ions at around 75 keV for N+ regions.
+
+
+
+In the N-well (NMOS):
+
+Use Mask 10 and implant boron ions at around 50 keV for P+ regions.
+
+
+
+
+
+Next, we perform high-temperature annealing at about 1000°C.
+
+This causes the implanted regions to become the final source and drain, completing the transistor structure.
+
+
+
+
+
+
+
+7) Contact and Local Interconnect Formation
+
+
+
+First, we remove the thin screen oxide layer using etching.
+
+
+
+Then we deposit a titanium (Ti) layer using sputtering. Titanium is chosen because it has low resistivity.
+
+
+
+
+
+Now, to form a good connection between Ti and the source, drain, and gate, we heat the wafer to 650–700°C in a nitrogen (N₂) atmosphere for about 60 seconds.
+
+
+
+This causes a chemical reaction, forming:
+
+
+
+Titanium silicide (TiSi₂) over silicon (to reduce contact resistance)
+
+
+
+Titanium nitride (TiN) over other areas (used for local interconnect)
+
+
+
+
+
+Next:
+
+
+
+Use Mask 11 and photoresist to etch the TiN layer, forming precise contact openings.
+
+
+
+TiN is removed using RCA cleaning, and the local interconnects are formed.
+
+
+
+
+
+
+
+
+
+8) Higher-Level Metal Formation
+
+
+
+This stage forms the upper metal layers that connect different parts of the chip.
+
+
+
+First, we observe that the wafer surface is not flat, which causes issues during metal deposition.
+
+
+
+To solve this, we deposit a thick SiO₂ layer (doped to lower resistivity), and perform CMP (Chemical Mechanical Polishing) to flatten the surface.
+
+
+
+
+
+Now, for the metal contacts:
+
+
+
+Use Mask 12 and photoresist to etch openings in SiO₂.
+
+Deposit a thin layer of TiN (~10 nm). This layer:
+
+Acts as a barrier between silicon and metal
+
+Helps adhesion between metal and oxide
+
+
+
+Next, deposit a blanket layer of tungsten (W) to fill the holes.
+
+Again, use CMP to planarize the surface. Now, W acts as the contact plug.
+
+
+
+To form the first-level metal interconnects:
+
+Deposit aluminum (Al) layer.
+
+Use Mask 13 and photoresist to etch Al, creating the metal paths using plasma etching.
+
+
+
+For the second metal layer:
+
+Repeat similar steps using:
+
+Mask 14 to etch SiO₂
+
+Mask 15 to etch the second Al layer
+
+This second metal layer is thicker for carrying more current.
+
+Finally, we deposit a passivation layer using SiO₂ or Si₃N₄ to protect the chip.
+
+
+
+
+
+
+
+
+
+
+
+
+
