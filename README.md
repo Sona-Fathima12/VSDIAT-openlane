@@ -338,7 +338,73 @@ The solution of the problem is use multiple power supply. So, every block will t
 
 
 
+## Pin placement and logical cell placement blockage
+### 5. pin placement
+
+![image](https://github.com/user-attachments/assets/2b51e135-553d-4eb2-8612-e30ce759b49f)
+
+
+Consider a design where two separate circuits operate on different clock domains: the first is driven by Clk1 and takes Din1 as input to produce Dout1 as output, while the second is driven by Clk2 with Din2 as input and Dout2 as output. Additionally, there are some pre-placed cells, including BlockA, which receives inputs from both Din1 and Din2, and BlockB, which takes Clk1 and Clk2 as inputs and generates a clock output signal, ClkOut. Overall, the design features four input ports—Din1, Din2, Clk1, and Clk2—and three output ports—Dout1, ClkOut, and Dout2
+
+
+![image](https://github.com/user-attachments/assets/d2e2804a-fd2f-4979-ba44-2e7a3b0176ce)
 
 
 
+The given design illustrates two data paths working across two clock domains. In the upper path, Din3 is fed to a flip-flop (FF1) clocked by Clk1, and its output is passed through a buffer (labeled 1) and an XOR gate before reaching a second flip-flop (FF2) clocked by Clk2, producing the output Dout3. In the lower path, Din4 is input to another FF1, this time clocked by Clk2. Its output is passed through a buffer (1), then through an AND gate (with another input from Block C), and finally through another buffer (2) into FF2 clocked by Clk1, resulting in Dout4. Block C interfaces between both paths and interacts with Clk1 and Din3, playing a role in synchronizing or processing signals between the two domains.
 
+![image](https://github.com/user-attachments/assets/df9e7d0a-c22d-456a-b86a-9760367952c0)
+
+The complete design now has six input ports: Din1, Din2, Din3, Din4, Clk1, and Clk2. It produces five outputs: Dout1, Dout2, Dout3, Dout4, and ClkOut. Each data path flows through flip-flops and logic gates, with Blocks A, B, and C managing signal and clock coordination. The connectivity between all components is described using VHDL or Verilog, and this is known as the 'Netlist'.
+
+![image](https://github.com/user-attachments/assets/d30c892d-3d31-488c-813d-23ea516f1926)
+
+
+We now place the netlist inside the core that was designed earlier and aim to fill the empty space between the core and the die using pin information. The frontend team is responsible for defining the netlist, including all input and output connections, while the backend team handles the physical placement of pins. Based on where the pins are placed, we need to position the preplaced blocks close to their respective input sources. This ensures efficient routing and better performance in the overall layout.
+
+
+## LAB DAY 2
+
+1.Run 'picorv32a' design floorplan using OpenLANE flow and generate necessary outputs.
+
+![Capture 5](https://github.com/user-attachments/assets/4e56f7f7-3232-4fa8-a609-4cb4e9b06535)
+![Capture 6](https://github.com/user-attachments/assets/ebcc3d54-9f02-4fa0-a30c-2cebc0aa74b5)
+
+2.Calculate the die area in microns from the values in floorplan def.
+
+![Capture 7](https://github.com/user-attachments/assets/60e4a25f-d59f-4db6-9039-60903646d28e)
+
+Area of die in microns = Die width in microns * die height in microns
+
+3.Load generated floorplan def in magic tool and explore the floorplan.
+
+### Floor plan def in magic
+
+Commands used:
+![Capture 8](https://github.com/user-attachments/assets/116d68da-9629-4173-b0be-cf27e9773d69)
+
+![Capture 9](https://github.com/user-attachments/assets/8c1bdf84-c1e9-4e21-9ea7-c8bbd59120d9)
+
+### equidistant tapcells 
+![Capture 10](https://github.com/user-attachments/assets/a3143efa-5145-438a-ab81-74909988e2e9)
+
+### Port layer as set through config.tcl
+![Capture 11](https://github.com/user-attachments/assets/657a3a62-4f1c-4e1b-98de-da6a85eed42d)
+![Capture 12](https://github.com/user-attachments/assets/f4a7f662-608c-41b3-b9a0-296241783ada)
+
+
+![Capture 13](https://github.com/user-attachments/assets/1b4041ab-3018-4887-a3aa-155b0f717e25)
+![Capture 14](https://github.com/user-attachments/assets/d8256061-17f3-407e-b5de-1aa6e45a72e2)
+![Capture 15](https://github.com/user-attachments/assets/7319834b-2a9e-4bca-b4f5-bf5bb0694e95)
+
+4.Run 'picorv32a' design congestion aware placement using OpenLANE flow and generate necessary outputs.
+
+![Capture 16](https://github.com/user-attachments/assets/4f7be799-0238-4043-879e-8905a599f35f)
+![Capture 17](https://github.com/user-attachments/assets/8165d202-a0d9-4416-842d-feb74a117b93)
+
+5.Load generated placement def in magic tool and explore the placement.
+
+Commands used:
+![Capture 18](https://github.com/user-attachments/assets/5bd9de61-a3bc-4456-a9b2-12853fbb6ce8)
+![Capture 19](https://github.com/user-attachments/assets/269048ed-c8bf-4404-97b5-2e79d192b4d7)
+![Capture 20](https://github.com/user-attachments/assets/df167c0a-1627-4dbc-afb7-aa9f1c87579b)
