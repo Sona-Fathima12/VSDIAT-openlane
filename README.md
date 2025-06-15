@@ -480,8 +480,30 @@ Commands used:
 ## Cell design and characterization flow.
 ## input for cell design flow
 
+In cell design flow, basic components like gates, flip-flops, and buffers are called standard cells, and they are stored in a library. Each function, like an inverter, may have many versions with the same logic but different sizes or strengths. To design these cells, we need some important inputs—like the PDK (Process Design Kit) which includes all the technology details, DRC and LVS rules which ensure the layout is correct and matches the circuit, SPICE models that describe how the transistors behave electrically, and user specifications like speed, area, and power. These inputs help us create a proper and working version of the cell to add to the library. 
+
+## Circuit design step
+
+In the design process of a standard cell, the height of the cell is decided by the distance between the power rail (VDD) and ground rail (GND), while the width depends on the required timing and drive strength. The design process has three main steps: circuit design, layout design, and characterization. In circuit design, we first create the logic function (like an inverter), and then model it using PMOS and NMOS transistors to match the library standards. The outputs of this step include files like CDL, GDSII, LEF, and an extracted SPICE netlist. In the layout design step, we take the transistor-level circuit and draw its layout using PMOS and NMOS networks. We then create network graphs, find an Euler’s path to optimize the layout, and draw a stick diagram based on it. This stick diagram is then turned into the actual layout following design rules. Once this layout is ready, we extract parasitic components like resistance and capacitance. The final step is characterization, where we simulate the cell to measure its timing, power, and noise behavior. 
+
+## Layout design step
+
+In layout design, the first step is to build the logic function using PMOS and NMOS transistors. From this, we create PMOS and NMOS network graphs that show how the transistors are connected. Then, we find the Euler’s path, which is a way to arrange the transistors in a line to make the layout compact and efficient. Using this path, we draw a stick diagram, which is a simple sketch showing how different parts will be placed. This stick diagram is then turned into the actual layout following design rules. The final layout will include details like cell width, height, pin positions, and other specifications. Once the layout is complete, we extract parasitic elements (like small resistances and capacitances) and move to the characterization stage, where we measure the cell’s timing, power, and noise. Before that, the layout is saved in GDSII format, and the electrical version is saved as a SPICE netlist for simulation. 
+
+## Typical characterization flow
+
+In the characterization process, the first step is to load the transistor model, followed by reading the extracted SPICE netlist. Next, we identify the behavior of the cell, like if it’s an inverter or buffer. After that, we read any subcircuits, attach power supplies, and then apply the input signal or stimulus. We also need to add output capacitance, which represents the load. Finally, we use the correct simulation command—like .tran for transient simulation or .dc for DC simulation. All these steps are written into a configuration file and given to a tool called GUNA, which runs the simulations and gives us information about timing, power, and noise. 
 
 
+## General timing characterization parameters
+
+## Timing threshold definitions
+
+When analyzing timing in digital circuits, we use something called timing threshold definitions to understand key points on a waveform. For example, when a signal is rising or falling, we don't measure the entire transition — instead, we look at certain percentage points. For slew rate (how fast a signal changes), we define points like Slew_low_rise_thr and Slew_low_fall_thr, which are usually around 20–30% of the voltage swing, and Slew_high_rise_thr and Slew_high_fall_thr, which are around 70–80%. These points help calculate how quickly a signal rises or falls. Similarly, to measure delay, we look at when the input or output waveform crosses 50% of the voltage level — these are called in_rise_thr, in_fall_thr, out_rise_thr, and out_fall_thr. These timing points are important for accurate delay and performance calculations in digital cell design.
+
+## Propagation delay and transition time
+
+To calculate the delay in a circuit, we subtract the time when the input signal reaches its threshold (typically 50%) from the time when the output signal reaches its threshold. So, delay = time(out_thr) - time(in_thr). If the thresholds are chosen incorrectly—like placing them too close to the top or bottom of the waveform—it can result in a negative delay, meaning the output changes before the input, which is physically incorrect and not acceptable. Even with the correct threshold value, negative delay can still happen if the waveforms overlap in the wrong way, showing why threshold choice and waveform behavior both matter. Similarly, transition time (how quickly a signal changes) is calculated by subtracting the low threshold time (e.g., 20%) from the high threshold time (e.g., 80%). For a rising edge, it’s slew_high_rise_thr - slew_low_rise_thr, and for a falling edge, it’s slew_high_fall_thr - slew_low_fall_thr. These calculations help us understand the speed and performance of a digital circuit. 
 
 
 
