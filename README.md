@@ -895,3 +895,13 @@ To accurately capture and represent these delays, delay tables are used. These t
 
 
 
+## Delay Table Usage – Part 1:
+
+![Screenshot (48)](https://github.com/user-attachments/assets/a5d6cbb2-11de-4ccc-8030-1af15895fbf7)
+
+In Power Aware Clock Tree Synthesis (CTS), delay tables are used to estimate the delay introduced by buffers based on input transition time (slew) and output load capacitance. For example, in the given figure, if the input transition to buffer CBUF1 is 40ps and it drives a 60fF load, the corresponding delay falls between entries x9 and x10 in the CBUF1 delay table. Since this exact load isn't listed, the delay is interpolated and represented as x9′, which helps designers estimate the delay more accurately for intermediate values. This process ensures more precise clock timing calculations during CTS. The same principle applies for buffer CBUF2, where the input transition is assumed to be around 60ps, and the output load is 50fF. Looking at the delay table for CBUF2, the corresponding delay is y15.
+
+
+## Delay Table Usage – Part 2:
+
+By combining both delays, the total delay from the input to each clock sink (output point) is calculated as x9′ + y15, while ignoring wire delays for simplicity. Since the buffer structure is symmetric and the output loads at all clock endpoints are equal, the skew (difference in arrival times of the clock signal) is zero. However, if the load at each endpoint (B and C) were different, the delay would vary due to different output loads, leading to non-zero skew. These tables, therefore, not only help in estimating individual buffer delays but also play a critical role in balancing clock paths, reducing skew, and enabling power-efficient and reliable CTS.
