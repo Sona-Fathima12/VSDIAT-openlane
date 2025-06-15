@@ -580,10 +580,50 @@ These calculations help us understand the speed and performance of a digital cir
 
 # Sky130 Day 3 - Design library cell using Magic Layout and ngspice characterization
 
--IO placer revision
-32-SPICE deck creation for CMOS inverter
-33-SPICE simulation lab for CMOS inverter
-34-Switching Threshold Vm
+## Labs for CMOS inverter ngspice simulations 
+## IO placer revision
+
+we have completed floorplanning and placement for our chip layout. But if we want to revise the floorplan—especially how the IO pins are arranged—we can do that too. For example, in the default setup, the pins are placed at equal distances around the chip. But if we want to change their positions, such as moving them to specific sides, we can adjust the configuration settings using the set command. To enable custom pin placement, we first check the available configuration switches and change the setting env(FP_IO_MODE) from 1 to 2. After that, we re-run the floorplanning step to reflect the updated pin layout. Once the new floorplan is generated, we can check the changes using Magic by opening the layout with the magic -T command. 
+
+
+
+In the updated layout shown in the image, we can observe that all the IO pins have shifted to the lower half of the core, leaving the upper half empty. This confirms that our custom pin placement settings have taken effect, allowing us to tailor the design based on routing ease or other layout considerations.
+
+## SPICE deck creation for CMOS inverter
+
+In VTC (Voltage Transfer Characteristic) SPICE simulations, the first step is to create a SPICE deck. This is essentially a netlist that contains all the connectivity details of the components used in the circuit. It includes the inputs provided to the circuit and the output points where simulation results are observed. One important part is defining how each component is connected, especially the substrate pins, which help tune the threshold voltage of the PMOS and NMOS transistors. We also specify the values for PMOS and NMOS—here, both transistors are chosen with the same size for simplicity. 
+
+![image](https://github.com/user-attachments/assets/a885cd55-a7e6-46d1-86ed-f6b0e409f6fa)
+![image](https://github.com/user-attachments/assets/7e343282-b87e-4f22-a449-a025926a761e)
+
+
+Next, we identify and label the nodes in the circuit, which are the points between connected components. These nodes are then named meaningfully—for example, Vin for the input node, Vss for ground, Vdd for power, and out for the output. Once the nodes are named, we can write the SPICE deck in the proper format. The transistor connections are listed as: Drain, Gate, Source, and Substrate. For the PMOS (M1), the drain is connected to the output, gate to the input, and both source and substrate to Vdd. For the NMOS (M2), the drain is also connected to the output, gate to input, and both source and substrate are connected to ground (0). 
+
+![image](https://github.com/user-attachments/assets/498ce820-9c95-4633-98d5-5029cb6e292e)
+
+## SPICE simulation lab for CMOS inverter
+
+![image](https://github.com/user-attachments/assets/b6fc1047-ac9d-484e-91d5-5e2aab2b0d2f)
+
+ we have defined the connectivity of the CMOS inverter. Now, we add connections for other essential components such as the load capacitor and power sources. The load capacitor is connected between the output node (out) and ground (node 0), with a value of 10 femtofarads (10fF). The supply voltage, Vdd, is applied between the Vdd node and ground with a value of 2.5V. Similarly, an input voltage source is connected between the Vin node and ground, also set at 2.5V. To observe how the output responds to different input values, we set up a simulation command that sweeps Vin from 0 to 2.5 volts in small steps of 0.05V. 
+
+For the simulation to work accurately, we also include model files, which describe the behavior of the NMOS and PMOS transistors in detail. After setting everything up, we run the SPICE simulation and observe the output graph.
+
+![image](https://github.com/user-attachments/assets/378c8626-737e-4601-ba8a-67db55361b6f)
+
+In this case, both NMOS and PMOS have the same width, and the resulting transfer characteristic curve is shifted left from the center.
+
+![image](https://github.com/user-attachments/assets/69fb2966-e7d0-4866-8c47-a1a5c988947b)
+![image](https://github.com/user-attachments/assets/a2f59624-22e8-4b2b-9032-61df8cb64b04)
+![image](https://github.com/user-attachments/assets/4a30d698-62e2-4be6-9b70-7b9a751faef3)
+
+ In this simulation above, we increase the PMOS width to 2.5 times that of the NMOS. This change results in a more balanced graph, where the transfer characteristic lies exactly in the middle. This demonstrates how the sizing of transistors directly affects the switching point and performance of the inverter. 
+ 
+## Switching Threshold Vm
+
+Both CMOS models, whether they have equal or different transistor widths, serve different purposes and have their own applications. When we compare their output waveforms, we observe that the overall shape remains the same regardless of voltage levels, which shows the robustness of CMOS technology. As Vin increases from low to high, the output Vout switches from high to low, maintaining the core inverter behavior. This consistency, even when the NMOS and PMOS sizes are varied, is why CMOS logic is so commonly used in digital gate design—it remains stable, efficient, and reliable. 
+
+One key parameter that reflects the robustness of a CMOS inverter is the switching threshold, Vm. This is the point where the input voltage equals the output voltage (Vin = Vout). In the graph shown, this occurs around 0.9V. At this point, both the NMOS and PMOS transistors may be partially on, which can cause a direct current path from Vdd to ground, leading to leakage current. This critical point helps in analyzing the performance and power consumption of CMOS circuits. By comparing the graphs, we also gain insights into the operating regions of PMOS and NMOS, and understand how current flows differently in each type of transistor depending on the input voltage.
 35-Static and dynamic simulation of CMOS inverter
 36-Lab steps to git clone vsdstdcelldesign
 
