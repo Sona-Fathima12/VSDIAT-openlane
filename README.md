@@ -515,6 +515,13 @@ To calculate the delay in a circuit, we subtract the time when the input signal 
 
 # Sky130 Day 3 - Design library cell using Magic Layout and ngspice characterization
 
+-IO placer revision
+32-SPICE deck creation for CMOS inverter
+33-SPICE simulation lab for CMOS inverter
+34-Switching Threshold Vm
+35-Static and dynamic simulation of CMOS inverter
+36-Lab steps to git clone vsdstdcelldesign
+
 ## Inception of layout CMOS fabrication process
 ## 16-Mask CMOS Process
 
