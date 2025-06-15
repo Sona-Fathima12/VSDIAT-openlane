@@ -586,12 +586,11 @@ These calculations help us understand the speed and performance of a digital cir
 we have completed floorplanning and placement for our chip layout. But if we want to revise the floorplan—especially how the IO pins are arranged—we can do that too. For example, in the default setup, the pins are placed at equal distances around the chip. But if we want to change their positions, such as moving them to specific sides, we can adjust the configuration settings using the set command. To enable custom pin placement, we first check the available configuration switches and change the setting env(FP_IO_MODE) from 1 to 2. After that, we re-run the floorplanning step to reflect the updated pin layout. Once the new floorplan is generated, we can check the changes using Magic by opening the layout with the magic -T command. 
 
 
-
-In the updated layout shown in the image, we can observe that all the IO pins have shifted to the lower half of the core, leaving the upper half empty. This confirms that our custom pin placement settings have taken effect, allowing us to tailor the design based on routing ease or other layout considerations.
+, we can see that all the IO pins have shifted to the lower half of the core, leaving the upper half empty. This confirms that our custom pin placement settings have taken effect, allowing us to tailor the design based on routing ease or other layout considerations.
 
 ## SPICE deck creation for CMOS inverter
 
-In VTC (Voltage Transfer Characteristic) SPICE simulations, the first step is to create a SPICE deck. This is essentially a netlist that contains all the connectivity details of the components used in the circuit. It includes the inputs provided to the circuit and the output points where simulation results are observed. One important part is defining how each component is connected, especially the substrate pins, which help tune the threshold voltage of the PMOS and NMOS transistors. We also specify the values for PMOS and NMOS—here, both transistors are chosen with the same size for simplicity. 
+In VTC (Voltage Transfer Characteristic) SPICE simulations, the first step is to create a SPICE deck. This is essentially a netlist that contains all the connectivity details of the components used in the circuit. It includes the inputs provided to the circuit and the output points where simulation results are observed. One important part is defining how each component is connected, especially the substrate pins, which help tune the threshold voltage of the PMOS and NMOS transistors. We also specify the values for PMOS and NMOS—here, both transistors are taken with the same size for simplicity. 
 
 ![image](https://github.com/user-attachments/assets/a885cd55-a7e6-46d1-86ed-f6b0e409f6fa)
 ![image](https://github.com/user-attachments/assets/7e343282-b87e-4f22-a449-a025926a761e)
@@ -607,7 +606,7 @@ Next, we identify and label the nodes in the circuit, which are the points betwe
 
  we have defined the connectivity of the CMOS inverter. Now, we add connections for other essential components such as the load capacitor and power sources. The load capacitor is connected between the output node (out) and ground (node 0), with a value of 10 femtofarads (10fF). The supply voltage, Vdd, is applied between the Vdd node and ground with a value of 2.5V. Similarly, an input voltage source is connected between the Vin node and ground, also set at 2.5V. To observe how the output responds to different input values, we set up a simulation command that sweeps Vin from 0 to 2.5 volts in small steps of 0.05V. 
 
-For the simulation to work accurately, we also include model files, which describe the behavior of the NMOS and PMOS transistors in detail. After setting everything up, we run the SPICE simulation and observe the output graph.
+For the simulation to work correctly, we also include model files, which describe the behavior of the NMOS and PMOS transistors in detail. After setting everything up, we run the SPICE simulation and observe the output graph.
 
 ![image](https://github.com/user-attachments/assets/378c8626-737e-4601-ba8a-67db55361b6f)
 
@@ -625,7 +624,16 @@ Both CMOS models, whether they have equal or different transistor widths, serve 
 
 One key parameter that reflects the robustness of a CMOS inverter is the switching threshold, Vm. This is the point where the input voltage equals the output voltage (Vin = Vout). In the graph shown, this occurs around 0.9V. At this point, both the NMOS and PMOS transistors may be partially on, which can cause a direct current path from Vdd to ground, leading to leakage current. This critical point helps in analyzing the performance and power consumption of CMOS circuits. By comparing the graphs, we also gain insights into the operating regions of PMOS and NMOS, and understand how current flows differently in each type of transistor depending on the input voltage.
 35-Static and dynamic simulation of CMOS inverter
+
+In dynamic simulation of a CMOS inverter, we focus on understanding the rise and fall delay—how quickly the output changes from low to high (rise) and from high to low (fall) in response to a changing input. Unlike the previous simulations that used a DC sweep, this one uses a pulse input signal. Everything else in the setup, including the circuit and component values, remains the same. The simulation command used here is .tran, which stands for transient analysis, allowing us to observe how voltages change over time. 
+
+From the output, we get a Time vs Voltage graph. By examining this graph, we can measure how long it takes for the output to respond when the input pulse transitions. The rise delay refers to the time taken for the output to go from low to high, while the fall delay is the time taken to drop from high to low. These delays are influenced by factors like the switching threshold (Vm), transistor sizes, and load capacitance. Analyzing them helps us understand the speed performance of the CMOS inverter in real operating conditions. 
 36-Lab steps to git clone vsdstdcelldesign
+
+To begin, we first clone the GitHub repository by copying the clone address and using it in the terminal with the command git clone. This will create a folder named vsdstdcelldesign inside the openlane directory. If we open the openlane directory now, we’ll see that this new folder has been successfully created. Going inside the vsdstdcelldesign folder, we can find various files such as .mag, library files, and others that are essential for standard cell design. 
+
+To view the layout of the CMOS inverter, we need to open the .mag file using the Magic layout tool. But before doing that, we must copy a required technology file into the same folder using the cp command from the given path. Once the tech file is placed in the vsdstdcelldesign directory, we can directly open the .mag file in Magic without specifying the full path. Upon opening, we can clearly see the layout of the CMOS inverter along with the different layers used in its construction. 
+
 
 ## Inception of layout CMOS fabrication process
 ## 16-Mask CMOS Process
