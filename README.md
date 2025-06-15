@@ -578,12 +578,6 @@ These calculations help us understand the speed and performance of a digital cir
 ![image](https://github.com/user-attachments/assets/8769604d-9b00-43a3-8a28-f934fc31a4ca)
 
 
-
-
-
-
-
-
 # Sky130 Day 3 - Design library cell using Magic Layout and ngspice characterization
 
 -IO placer revision
