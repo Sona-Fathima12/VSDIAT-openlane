@@ -1010,28 +1010,63 @@ This final timing check is what we use in real-world STA (Static Timing Analysis
 
 
 
+# sky130 Day 5-final steps for RTL2GDS using tritonRoute and openSTA
+## Routing and design rule check (DRC) 
 
-Routing and design rule check (DRC) 
+## Introduction to Maze Routing -Lee’s Algorithm
+![image](https://github.com/user-attachments/assets/35e7c316-01a2-4426-a7b4-b5a1905adfce)
 
-Introduction to Maze Routing Ã�Â� LeeÃ�Â�s algorithm 
+In the final stage of physical design, called routing, we aim to connect two points—source and target—using the shortest and most efficient path with minimal bends. One popular technique used is Maze Routing based on Lee’s Algorithm.
 
-In the final stage of physical design, called routing, we aim to connect two points—source and target—using the shortest and most efficient path with minimal bends. One popular technique used is Maze Routing based on Lee’s Algorithm. In this method, the routing area is divided into a grid, and the algorithm searches for the best path using only horizontal and vertical moves—diagonal moves are not allowed. Starting from the source point, the algorithm labels all reachable neighboring grids step by step with increasing integers until it reaches the target. Once the target is labeled, it traces back the shortest path, ideally forming 'L' or 'Z' shaped routes to avoid unnecessary twists. This process ensures clean, efficient routing with minimal complexity, avoiding zig-zag paths. Multiple examples follow the same approach, helping to visualize and understand the method clearly. 
+![image](https://github.com/user-attachments/assets/05cc877e-040a-4001-804b-115ce45eefa1)
 
-Design Rule Check 
+In this method, the routing area is divided into a grid, and the algorithm searches for the best path using only horizontal and vertical moves—diagonal moves are not allowed.
 
-Before performing Design Rule Check (DRC), we need to follow a process called DRC cleaning, which ensures that our circuit meets all fabrication rules. For example, when placing two parallel wires, there must be a minimum required distance between them to prevent issues. Several rules must be followed: the wire width should meet the minimum size based on the lithography technology used; the wire pitch, which is the center-to-center distance between two wires, must also meet a specific minimum; and the wire spacing, or gap between the edges of two wires, must follow certain limits. In some cases, like when signals get shorted, the solution is to move one wire to a different metal layer—usually an upper layer that’s wider. This introduces additional checks such as via width, which must not be below a certain size, and via spacing, which also must meet minimum distance rules. After routing and DRC cleaning, the final step is parasitic extraction, where we calculate the resistance and capacitance of the wires, which is essential for accurate circuit analysis and further processing. 
+![image](https://github.com/user-attachments/assets/fb2e0060-cb06-46d8-bff9-26082083156a)
+![image](https://github.com/user-attachments/assets/da79a367-69a5-407b-b11d-dd3a73ba9d84)
 
-Power Distribution Network and routing 
 
-Lab steps to build power distribution network 
+Starting from the source point, the algorithm labels all reachable neighboring grids step by step with increasing integers until it reaches the target. Once the target is labeled, it traces back the shortest path, ideally forming 'L' or 'Z' shaped routes to avoid unnecessary twists.mostly prefers 'L' type because only 1 bend is present.
 
-After setting up the OpenLANE environment using Docker and entering interactive mode with ./flow.tcl -interactive, we load the required package and check the current DEF file using echo $::env(CURRENT_DEF). Once Clock Tree Synthesis (CTS) is complete, the next step is to generate the Power Distribution Network (PDN) by running the gen_pdn command. The generated output shows that the VGND net successfully covers the grid, confirming that the PDN has been created. Power is delivered to the chip through VDD and GND pads, and then distributed across the chip via metal tracks, finally reaching the standard cells to ensure proper functioning. 
+![image](https://github.com/user-attachments/assets/7bb7fdc4-d7d4-4852-ad39-579a41c5d32b)
+![image](https://github.com/user-attachments/assets/fd45e4fc-d6eb-49a8-9605-32f5442edcac)
 
-Lab steps from power straps to std cell power 
 
-In the image, the green area represents the chip, while the yellow, red, and blue boxes indicate the I/O pins, power pads, and ground pads respectively. Power flows from these pads into the chip through the black dots shown at the intersection points between the pads and the power rings. These power rings then distribute power across the chip using vertical and horizontal metal tracks, shown in red and blue, ensuring that all parts of the chip receive the necessary power. This entire process is called power planning and is a crucial part of the physical design of any electronic device. 
+This process ensures clean, efficient routing with minimal complexity, avoiding zig-zag paths. Multiple examples follow the same approach, helping to visualize and understand the method clearly. 
+![image](https://github.com/user-attachments/assets/37b8ed7e-e813-4ce8-8f56-90369615594d)
+![image](https://github.com/user-attachments/assets/33ebf8ff-104f-44ed-b617-ca69bff48483)
 
-Basics of global and detail routing and configure TritonRoute 
+## Design Rule Check 
+
+Before performing Design Rule Check (DRC), we need to follow a process called DRC cleaning, which ensures that our circuit meets all fabrication rules. For example, when placing two parallel wires, there must be a minimum required distance between them to prevent issues.
+
+the steps are:
+
+1.the wire width should meet the minimum size based on the lithography technology used
+![image](https://github.com/user-attachments/assets/994cece0-ee61-4f8f-a57e-a41ef7212677)
+
+2.the wire pitch, which is the center-to-center distance between two wires, must also meet a specific minimum
+![image](https://github.com/user-attachments/assets/1b6a75e9-a1fa-456f-b8f9-ff3c615f7845)
+
+3.the wire spacing, or gap between the edges of two wires, must follow certain limits.
+![image](https://github.com/user-attachments/assets/bacc1258-48ba-4280-8c14-6f856d45fd62)
+
+
+In some cases, like when signals get shorted, the solution is to move one wire to a different metal layer—usually an upper layer that’s wider. it leads to additional checks, that are ** via width **( which must not be below a certain size) and ** via spacing ** (which also must meet minimum distance rules). After routing and DRC cleaning, the final step is parasitic extraction, where we calculate the resistance and capacitance of the wires, which is essential for accurate circuit analysis and further processing. 
+
+![image](https://github.com/user-attachments/assets/74305480-1021-4a3f-a62a-27840a100aa5)
+![image](https://github.com/user-attachments/assets/e344431b-0442-4e0d-a3ec-a75d32e8819f)
+
+## Power Distribution Network and routing 
+
+## Lab steps to build power distribution network 
+
+
+## Lab steps from power straps to std cell power 
+
+
+
+## Basics of global and detail routing and configure TritonRoute 
 
 The final step in the physical design process is routing. After generating the PDN, the DEF file—named 17-pdn.def—now includes both clock and power information from the earlier steps like cts.def. To explore different routing options or switches, you can check the README.md file in the configuration folder of the OpenLANE directory. If needed, routing types can be changed using specific set commands, though in this case, the default settings are used. The routing process begins with the command run_routing and is divided into two main stages: Global Routing and Detailed Routing. In global routing, the chip layout is divided into rectangular grid cells, forming a 3D routing graph, and this step is handled by the FastRoute engine. The next step, detailed routing, is done by the TritonRoute engine, which finalizes the exact wire paths. For example, pins A, B, C, and D are connected to form a net through this process, ensuring all connections are accurately made on the chip. 
 
