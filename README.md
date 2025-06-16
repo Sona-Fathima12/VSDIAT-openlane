@@ -855,7 +855,33 @@ This second metal layer is thicker for carrying more current.Finally, we deposit
 ![image](https://github.com/user-attachments/assets/28051df2-427f-4a7a-b15c-c9e088f24cf7)
 
 
+## LAB DAY 3
+### COMMANDS:
 
+![Capture 21](https://github.com/user-attachments/assets/15048b0a-9dea-4966-9ab1-9876b0da422c)
+![Capture 22](https://github.com/user-attachments/assets/a1113f37-ac21-4f33-b136-220cceae1f8f)
+
+### THE LAYOUT:
+![Capture 23 1](https://github.com/user-attachments/assets/49c11e99-36b3-4f00-8e2b-3efff0e95a1d)
+
+### NMOS identified
+![Capture 24](https://github.com/user-attachments/assets/b135322f-83d3-49d8-b334-bf222b344e89)
+### PMOS identified
+![Capture 25](https://github.com/user-attachments/assets/6ede103d-3a14-4277-85ad-1ca26e37338b)
+### Y connectivity to PMOS and NMOS drain verified
+![Capture 26](https://github.com/user-attachments/assets/54005616-b043-492b-acd3-b99e93d4f8f5)
+### PMOS source connectivity verified.
+![Capture 27](https://github.com/user-attachments/assets/27cd166b-08a5-49be-998d-872ca9f1abdc)
+### NMOS source connectivity to VSS veified
+![Capture 28](https://github.com/user-attachments/assets/454275e1-e38a-4c26-a2dc-9c3e12d5ce33)
+### DRC error
+![Capture 29](https://github.com/user-attachments/assets/88707405-d079-4d8b-8113-61b072814fbe)
+![Capture 30](https://github.com/user-attachments/assets/2236b3f0-a652-4199-bc72-27f3e620a0c2)
+### after giving extraction commands:
+![Capture 31](https://github.com/user-attachments/assets/5fb6af4a-59ea-44c7-b859-435bf5b8d602)
+![Capture 33](https://github.com/user-attachments/assets/3fc34310-77c4-4ce4-b969-50e623bd6a3b)
+### Measuring unit diatance in the layout after grind on in the windows:
+![Capture 34](https://github.com/user-attachments/assets/c43e244f-7da5-4f34-a2b6-999d5aed60bb)
 
 
 
