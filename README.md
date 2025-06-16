@@ -623,12 +623,12 @@ In this case, both NMOS and PMOS have the same width, and the resulting transfer
 Both CMOS models, whether they have equal or different transistor widths, serve different purposes and have their own applications. When we compare their output waveforms, we observe that the overall shape remains the same regardless of voltage levels, which shows the robustness of CMOS technology. As Vin increases from low to high, the output Vout switches from high to low, maintaining the core inverter behavior. This consistency, even when the NMOS and PMOS sizes are varied, is why CMOS logic is so commonly used in digital gate design—it remains stable, efficient, and reliable. 
 
 One key parameter that reflects the robustness of a CMOS inverter is the switching threshold, Vm. This is the point where the input voltage equals the output voltage (Vin = Vout). In the graph shown, this occurs around 0.9V. At this point, both the NMOS and PMOS transistors may be partially on, which can cause a direct current path from Vdd to ground, leading to leakage current. This critical point helps in analyzing the performance and power consumption of CMOS circuits. By comparing the graphs, we also gain insights into the operating regions of PMOS and NMOS, and understand how current flows differently in each type of transistor depending on the input voltage.
-35-Static and dynamic simulation of CMOS inverter
+## Static and dynamic simulation of CMOS inverter
 
 In dynamic simulation of a CMOS inverter, we focus on understanding the rise and fall delay—how quickly the output changes from low to high (rise) and from high to low (fall) in response to a changing input. Unlike the previous simulations that used a DC sweep, this one uses a pulse input signal. Everything else in the setup, including the circuit and component values, remains the same. The simulation command used here is .tran, which stands for transient analysis, allowing us to observe how voltages change over time. 
 
 From the output, we get a Time vs Voltage graph. By examining this graph, we can measure how long it takes for the output to respond when the input pulse transitions. The rise delay refers to the time taken for the output to go from low to high, while the fall delay is the time taken to drop from high to low. These delays are influenced by factors like the switching threshold (Vm), transistor sizes, and load capacitance. Analyzing them helps us understand the speed performance of the CMOS inverter in real operating conditions. 
-36-Lab steps to git clone vsdstdcelldesign
+## Lab steps to git clone vsdstdcelldesign
 
 To begin, we first clone the GitHub repository by copying the clone address and using it in the terminal with the command git clone. This will create a folder named vsdstdcelldesign inside the openlane directory. If we open the openlane directory now, we’ll see that this new folder has been successfully created. Going inside the vsdstdcelldesign folder, we can find various files such as .mag, library files, and others that are essential for standard cell design. 
 
@@ -869,7 +869,8 @@ This second metal layer is thicker for carrying more current.Finally, we deposit
 ### PMOS identified
 ![Capture 25](https://github.com/user-attachments/assets/6ede103d-3a14-4277-85ad-1ca26e37338b)
 ### Y connectivity to PMOS and NMOS drain verified
-![Capture 26](https://github.com/user-attachments/assets/54005616-b043-492b-acd3-b99e93d4f8f5)
+![ect](https://github.com/user-attachments/assets/d7379ac5-9083-4d13-ac2a-260ac53458e7)
+
 ### PMOS source connectivity verified.
 ![Capture 27](https://github.com/user-attachments/assets/27cd166b-08a5-49be-998d-872ca9f1abdc)
 ### NMOS source connectivity to VSS veified
