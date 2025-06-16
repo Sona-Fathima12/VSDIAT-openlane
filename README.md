@@ -947,3 +947,92 @@ This final timing check is what we use in real-world STA (Static Timing Analysis
 ![image](https://github.com/user-attachments/assets/054296db-1f5c-4b37-b47c-6886d46eae22)
 ![image](https://github.com/user-attachments/assets/ddce4f28-dd92-435d-9c2d-80ee2b6234c1)
 ![image](https://github.com/user-attachments/assets/a95a2a38-fc73-4f4c-90c7-c7bb93e8bdf0)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Routing and design rule check (DRC) 
+
+Introduction to Maze Routing Ã�Â� LeeÃ�Â�s algorithm 
+
+In the final stage of physical design, called routing, we aim to connect two points—source and target—using the shortest and most efficient path with minimal bends. One popular technique used is Maze Routing based on Lee’s Algorithm. In this method, the routing area is divided into a grid, and the algorithm searches for the best path using only horizontal and vertical moves—diagonal moves are not allowed. Starting from the source point, the algorithm labels all reachable neighboring grids step by step with increasing integers until it reaches the target. Once the target is labeled, it traces back the shortest path, ideally forming 'L' or 'Z' shaped routes to avoid unnecessary twists. This process ensures clean, efficient routing with minimal complexity, avoiding zig-zag paths. Multiple examples follow the same approach, helping to visualize and understand the method clearly. 
+
+Design Rule Check 
+
+Before performing Design Rule Check (DRC), we need to follow a process called DRC cleaning, which ensures that our circuit meets all fabrication rules. For example, when placing two parallel wires, there must be a minimum required distance between them to prevent issues. Several rules must be followed: the wire width should meet the minimum size based on the lithography technology used; the wire pitch, which is the center-to-center distance between two wires, must also meet a specific minimum; and the wire spacing, or gap between the edges of two wires, must follow certain limits. In some cases, like when signals get shorted, the solution is to move one wire to a different metal layer—usually an upper layer that’s wider. This introduces additional checks such as via width, which must not be below a certain size, and via spacing, which also must meet minimum distance rules. After routing and DRC cleaning, the final step is parasitic extraction, where we calculate the resistance and capacitance of the wires, which is essential for accurate circuit analysis and further processing. 
+
+Power Distribution Network and routing 
+
+Lab steps to build power distribution network 
+
+After setting up the OpenLANE environment using Docker and entering interactive mode with ./flow.tcl -interactive, we load the required package and check the current DEF file using echo $::env(CURRENT_DEF). Once Clock Tree Synthesis (CTS) is complete, the next step is to generate the Power Distribution Network (PDN) by running the gen_pdn command. The generated output shows that the VGND net successfully covers the grid, confirming that the PDN has been created. Power is delivered to the chip through VDD and GND pads, and then distributed across the chip via metal tracks, finally reaching the standard cells to ensure proper functioning. 
+
+Lab steps from power straps to std cell power 
+
+In the image, the green area represents the chip, while the yellow, red, and blue boxes indicate the I/O pins, power pads, and ground pads respectively. Power flows from these pads into the chip through the black dots shown at the intersection points between the pads and the power rings. These power rings then distribute power across the chip using vertical and horizontal metal tracks, shown in red and blue, ensuring that all parts of the chip receive the necessary power. This entire process is called power planning and is a crucial part of the physical design of any electronic device. 
+
+Basics of global and detail routing and configure TritonRoute 
+
+The final step in the physical design process is routing. After generating the PDN, the DEF file—named 17-pdn.def—now includes both clock and power information from the earlier steps like cts.def. To explore different routing options or switches, you can check the README.md file in the configuration folder of the OpenLANE directory. If needed, routing types can be changed using specific set commands, though in this case, the default settings are used. The routing process begins with the command run_routing and is divided into two main stages: Global Routing and Detailed Routing. In global routing, the chip layout is divided into rectangular grid cells, forming a 3D routing graph, and this step is handled by the FastRoute engine. The next step, detailed routing, is done by the TritonRoute engine, which finalizes the exact wire paths. For example, pins A, B, C, and D are connected to form a net through this process, ensuring all connections are accurately made on the chip. 
+
+ 
+
+ 
+
+TritonRoute Features 
+
+TritonRoute feature 1 - Honors pre-processed route guides 
+
+The initial detailed routing step follows the route guides that were created during the fast routing stage. These route guides act as a blueprint, showing where each wire should go. To work properly, these guides must meet a few conditions: they should have a uniform width, follow the preferred routing direction for each layer, and ensure that all parts of a net are connected. Two guides are considered connected if they either touch on the same metal layer or overlap vertically on adjacent layers. The detailed router uses a smart technique called MILP-based panel routing, where routing happens in parallel within a layer and sequentially between layers, helping to make the process more efficient and organized. 
+
+TritonRoute Feature2 & 3 - Inter-guide connectivity and intra- & inter-layer routing 
+
+In detailed routing, every unconnected pin of a standard cell must be covered by a route guide to ensure it gets properly connected. As shown in the image, the black dots represent cell pins, and these are overlapped by the route guides, especially when the pins are placed at the intersection of vertical and horizontal routing tracks. This overlap helps ensure correct routing. The routing strategy used here is called intra-layer parallel and inter-layer sequential panel routing. "Intra-layer" means routing happens within a single metal layer, and "inter-layer" means it occurs between different layers. For example, looking at Metal 2 (M2), which has vertical routing, the layer is divided into strips called panels. Routing is done in parallel across panels with even indices first, then in the odd ones, all within the same layer. This pattern is repeated layer by layer—like in Metal 3 (M3)—where panels are also routed in parallel, first in the even panels (shown in part b) and then in the odd panels (shown in part c), completing the routing in a structured and efficient way. 
+
+TritonRoute method to handle connectivity  
+
+In detailed routing, the input is the LEF file, and the output is a complete routing solution that aims to minimize wire length and the number of vias. This process must follow several constraints, such as sticking to the provided route guides, ensuring all connections are made properly, and following the design rules. To manage connectivity, the router works within a defined routing space and uses specific points called Access Points (APs)—these are grid-aligned spots on metal layers used to connect wires either to other layers, to pins, or to I/O ports. A group of these related access points is called an Access Point Cluster (APC), and it collects all APs tied to the same source, like a pin or guide. The illustration shows examples of access points connecting to (a) a lower-layer segment, (b) a pin, and (c) an upper-layer segment, helping ensure smooth and rule-compliant routing throughout the design. 
+
+Routing topology algorithm and final files list post-route 
+
+To complete detailed routing efficiently, the algorithm calculates the cost of each Access Point Cluster (APC) and then finds the best connections by building a minimum spanning tree between them. This helps in selecting the optimal routing paths. After routing is done, a post-routing Static Timing Analysis (STA) is performed, which requires extracting parasitic effects like resistance and capacitance. This extraction is done using a Standard Parasitic Exchange Format (.spef) file. Since OpenLANE doesn’t include a built-in SPEF extractor, this step is carried out externally. Once generated, the .spef file is saved in the `routing` folder inside the `results` directory. Finally, the complete and routed chip layout is produced, showing the physical design ready for further analysis or fabrication. 
+
+ 
+
+ 
+
+ 
