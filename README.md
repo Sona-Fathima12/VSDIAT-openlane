@@ -432,15 +432,15 @@ step 2: placement in floorplan
 ![image](https://github.com/user-attachments/assets/5e115e54-f209-4159-b12f-b008fc67cdb9)
 
 
-after every logic gate and flip-flop from the netlist is assigned a proper shape and size, the next important step is placing these components onto the chip floorplan. The floorplan already contains the defined input and output ports, the netlist describing connectivity, and the physical dimensions of each component. With all this information, we now have a physical representation of each gate, which allows us to start positioning them on the floorplan based on how they are connected logically.
+after every logic gate and flip-flop from the netlist is assigne a proper shape and size, the next important step is placing these components onto the chip floorplan. The floorplan  already contains the defined input and  output ports, the netlist describing connectivity, and the physical dimensions of each component. With all this information, we now have a physical representation of each gate, which allows us to start positioning them on the floorplan based on how they are connected logically  .
 
 During placement, it is important to ensure that the locations of preplaced cells remain unchanged. These preplaced blocks serve specific roles in the design and must not be moved or overlapped by other cells. Placement must be done carefully so that no cell is positioned over the existing preplaced cells, and all logic gates are placed in a way that maintains the required signal flow. This ensures that logical connections are preserved, timing constraints are met, and signal delays are kept minimal.
 
-Initially, the placement is done in such a way that all gates are located close to their related input and output pins to support better performance. However, upon examining the layout, it is noticed that the distance between FF1 of Stage 4 and input Din4 is longer compared to others. This could potentially impact timing and delay. To address this, optimization of the placement is needed to reduce this distance, thereby improving the overall timing and efficiency of the circuit layout.
+Initially, the placement is done in such a way that all gates are located close to their related input and output pins to support better performance. However, upon examining the layout, it is noticed that the distance between FF1 of Stage 4 and input Din4 is longer compared to other. This could potentially impact timing and delay . To address this, optimization of the placement is needed to reduce this distance, there by improving the overall timing and efficiency of the circuit layout.
 
 step 3:Optimize placment.
 
-It is the solution to the problem of distance in placement area. So we use repeated repeaters are basically buffers that will recondition your original signal that will make a new signal which replicates the original signal and send it again .
+It is the solution to the problem of distance in placement area. So we use repeated repeaters are basically buffers that will recondition your original  signal that will make a new signal which replicates the original signal and send it again .
 As repeaters  increase area will be loss inside the core.The following pictures I attached are showing the repeaters used in the placement of each set of cells.
 
 In the first set the distance between Din1 and FF 1 is less . The wirelength is less and therfore there is not that much resistance and we can directly connect them together and from ff1 to 1 same there is no any large wirelength so we can connect to the together and similarly 1 to 2 and 2 to FF 2 and ff 2 to Dout1 can be connected without any problem because it has  acceptable wire length and there is no any huge capacitance so they can connected.
@@ -456,7 +456,7 @@ similar to stage 2, in Stage 3 also we required the buffer between gate2 and FF2
 
 ![image](https://github.com/user-attachments/assets/3e93cc95-abbe-44ac-9cf1-e31f0fa11106)
 
-In sEt 4, it is big tricky compared to the other three stages.So here the Din4 cant reach f f1 because of the pre placed cells so a buffer is set there so Din4 can reach the repeaters and then f f 1 and from ff1 to 1. and if we look 1 to 2, it cant be reached that easily because there is a huge distance. So a buffer is placed also we can see that the crisscross with the second set, so we can say that 4th set is in  metal 3 layer set 2 in metal 1 or 2 layer,3rd set in metal layer 4. So we have to check that what we have done is correct or not first. for that, We need to do a timing analysis by considering the ideal clocks and according to the data of analysis. We will understand that a placement is correct or not.
+In sEt 4, it is big tricky compared to the other three stages.So here the Din4 cant reach f f1 because of the pre placed cells so a buffer is set there so Din4 can reach the repeaters and then f f 1 and from ff1 to 1. and if we look 1 to 2, it cant be reached that easily because there is a huge distance. so a buffer is placed also we can see that the crisscross with the second set, so we can say that 4th set is in  metal 3 layer set 2 in metal 1 or 2 layer,3rd set in metal layer 4. so we have to check that what we have done is correct or not first. for that,. We need to do a timing analysis by considering the ideal clocks and according to the data of analysis. we will understand that a placement is correct or not.
 ![image](https://github.com/user-attachments/assets/6ac084d3-08ac-4da2-a4d3-f060706968d2)
 
 
@@ -484,12 +484,12 @@ Commands used:
 ![image](https://github.com/user-attachments/assets/612d3dab-bb87-4cbc-b89e-8a9e987294d2)
 
 
-In cell design flow, basic components like gates, flip-flops, and buffers are called standard cells, and they are stored in a library. Each function, like an inverter, may have many versions with the same logic but different sizes or strengths.
+In cell design flw, basic components like gates, flip-flops, and buffers are called standard cells, and they are stored in a library. each function, like an inverter, may have many versions with the same logic but different sizes or strengths  .
 The inverter has to represented in form of the shape, drive strength, power charracteristic and so on. Here cell design flow is devided into three parts.
 
 ![image](https://github.com/user-attachments/assets/1d9fa6c8-3402-4543-8bb4-001c6e35c1ae)
 
-1.Inputs :To design these cells, we need some important inputs—like the PDK (Process Design Kit) which includes all the technology details, DRC and LVS rules which ensure the layout is correct and matches the circuit, SPICE models that describe how the transistors behave electrically, and user specifications like speed, area, and power. These inputs help us create a proper and working version of the cell to add to the library. 
+1.Inputs :To design these cells, we need some important inputs like the PDK (Process Design Kit) which includes all the technology details, DRC and LVS rules which ensure the layout is correct and matches the circuit, SPICE models that describe how the transistors behave electrically, and user specifications like speed, area, and power. these inputs help us create a proper and working version of the cell to add to the library. 
 
 2.Design steps : It has 3 steps **circuit design**(implement the functions and model NMOS and PMOS inorder to meet library requirements),**layout design**,**characterization**
 
@@ -500,11 +500,11 @@ The inverter has to represented in form of the shape, drive strength, power char
 
 ## Circuit design step
 
-In the design process of a standard cell, the height of the cell is decided by the distance between the power rail (VDD) and ground rail (GND), while the width depends on the required timing and drive strength. The design process has three main steps: circuit design, layout design, and characterization. In circuit design, we first create the logic function (like an inverter), and then model it using PMOS and NMOS transistors to match the library standards. The outputs of this step include files like CDL, GDSII, LEF, and an extracted SPICE netlist. In the layout design step, we take the transistor-level circuit and draw its layout using PMOS and NMOS networks. 
+In the design process of a standard cell, the height of the cell is decided by the distance between the power rail (VDD) and ground rail (GND), while the width depends on the required timing and drive strength. The design process has three main steps: circuit design, layout design, and characterization. In circuit design, we first create the logic function (like an inverter), and then model it using PMOS and NMOS transistors to match the library standads. The outputs of this step include files like CDL, GDSII, LEF, and an extracted SPICE netlist. In the layout design step, we take the transistor-level circuit and draw its layout using PMOS and NMOS networks. 
 ![image](https://github.com/user-attachments/assets/24650768-b9ae-4d53-8015-e77fcc84e23c)
 
 
-We then create network graphs, find an Euler’s path to optimize the layout, and draw a stick diagram based on it. This stick diagram is then turned into the actual layout following design rules. Once this layout is ready, we extract parasitic components like resistance and capacitance. The final step is characterization, where we simulate the cell to measure its timing, power, and noise behavior. 
+We then create network graphs, find an Euler’s path to optimize the layout, and draw a stick diagram based on it. This stick diagram is then turned into the actual layout following design rules. Once this layout is ready, we extract parasitic components like resistance and capacitance. The final step is characterization, where we simulate the cell to  measure its timing, power, and noise behavior. 
 
 ## Layout design step
 
@@ -512,7 +512,7 @@ We then create network graphs, find an Euler’s path to optimize the layout, an
 ![image](https://github.com/user-attachments/assets/3a076c24-4c1a-4c8a-aa4b-3ec4cae905e8)
 ![image](https://github.com/user-attachments/assets/f14264e7-9139-40ad-b44c-7c92bca1e202)
 
-In layout design, the first step is to build the logic function using PMOS and NMOS transistors. From this, we create PMOS and NMOS network graphs that show how the transistors are connected. Then, we find the Euler’s path, which is a way to arrange the transistors in a line to make the layout compact and efficient. Using this path, we draw a stick diagram, which is a simple sketch showing how different parts will be placed. This stick diagram is then turned into the actual layout following design rules. The final layout will include details like cell width, height, pin positions, and other specifications. Once the layout is complete, we extract parasitic elements (like small resistances and capacitances) and move to the characterization stage, where we measure the cell’s timing, power, and noise. Before that, the layout is saved in GDSII format, and the electrical version is saved as a SPICE netlist for simulation. 
+In layout design, the first step is to built the logic function using PMOS and NMOS transistors. From this, we create PMOS and NMOS network graphs that show how the transistors are connected. Then, we find the Euler’s path, which is a way to arrange the transistors in a line to make the layout compact and efficient. using this path, we draw a stick diagram, which is a simple sketch showing how different parts will be placed. This stick diagram is then turned into the actual layout following design rules . the final layout will include details like cell width, height, pin positions, and other specifications. aftre the layout is complete, we extract parasitic elements (like small resistances and capacitances) and move to the characterization stage, where we measure the cell’s timing, power, and noise. Before that, the layout is saved in GDSII format, and the electrical version is saved as a SPICE netlist for simulation. 
 
 ## Typical characterization flow
 
@@ -538,7 +538,7 @@ All these steps are written into a configuration file and given to a tool called
 
 ## Timing threshold definitions
 
-When analyzing timing in digital circuits, we use something called timing threshold definitions to understand key points on a waveform. For example, when a signal is rising or falling, we don't measure the entire transition — instead, we look at certain percentage points. For slew rate (how fast a signal changes), we define points like Slew_low_rise_thr and Slew_low_fall_thr, which are usually around 20–30% of the voltage swing, and Slew_high_rise_thr and Slew_high_fall_thr, which are around 70–80%. These points help calculate how quickly a signal rises or falls.
+When analyzing timing in digital circuits, we use something called timing threshold definitions to understand key points on a waveform. For example, when a signal is rising or falling, we don't measure the entire transition  instead, we look at certain percentage points. For slew rate (how fast a signal changes), we define points like Slew_low_rise_thr and Slew_low_fall_thr, which are usually around 20 to 30% of the voltage swing and Slew_high_rise_thr and Slew_high_fall_thr, which are around 70 to80%. These points help calculate how quickly a signal rises or falls.
 
 ![image](https://github.com/user-attachments/assets/fa86e5bc-c918-443d-bd61-50ed8c16131a)
 ![image](https://github.com/user-attachments/assets/aa7be48d-0fa7-494c-9bd7-e7347028a3d6)
@@ -546,7 +546,7 @@ When analyzing timing in digital circuits, we use something called timing thresh
 ![image](https://github.com/user-attachments/assets/bda25642-dcb5-40ef-a1b9-f1841b79b8df)
 
 
-Similarly, to measure delay, we look at when the input or output waveform crosses 50% of the voltage level — these are called in_rise_thr, in_fall_thr, out_rise_thr, and out_fall_thr. These timing points are important for accurate delay and performance calculations in digital cell design.
+Similarly, to measure delay, we look at when the input or output waveform crosses 50% of the voltage level  these are called in_rise_thr, in_fall_thr, out_rise_thr, and out_fall_thr. These timing points are important for accurate delay and performance calculations in digital cell design.
 
 ![image](https://github.com/user-attachments/assets/f6ba0e88-c43b-4529-b633-5b818d28d6c9)
 ![image](https://github.com/user-attachments/assets/38c7d552-da95-41b2-8141-35434ae77f59)
@@ -621,19 +621,29 @@ In this case, both NMOS and PMOS have the same width, and the resulting transfer
  
 ## Switching Threshold Vm
 
-Both CMOS models, whether they have equal or different transistor widths, serve different purposes and have their own applications. When we compare their output waveforms, we observe that the overall shape remains the same regardless of voltage levels, which shows the robustness of CMOS technology. As Vin increases from low to high, the output Vout switches from high to low, maintaining the core inverter behavior. This consistency, even when the NMOS and PMOS sizes are varied, is why CMOS logic is so commonly used in digital gate design—it remains stable, efficient, and reliable. 
+Both CMOS models, whether they have equal or different transistor width , serve different purposes and have their own applications. when we compare their output waveforms, we observe that the overall shape remains the same regardless of voltage level , which shows the robustness of CMOS technology
+![image](https://github.com/user-attachments/assets/f9300be7-1b32-4fde-9484-7cc45814fcb4)
 
-One key parameter that reflects the robustness of a CMOS inverter is the switching threshold, Vm. This is the point where the input voltage equals the output voltage (Vin = Vout). In the graph shown, this occurs around 0.9V. At this point, both the NMOS and PMOS transistors may be partially on, which can cause a direct current path from Vdd to ground, leading to leakage current. This critical point helps in analyzing the performance and power consumption of CMOS circuits. By comparing the graphs, we also gain insights into the operating regions of PMOS and NMOS, and understand how current flows differently in each type of transistor depending on the input voltage.
+As Vin increases from low to high, the output Vout switches from high to low, maintaining the core inverter behavior. This consistency, even when the NMOS and PMOS sizes are varied, is why CMOS logic is so commonly used in digital gate design it remains stable, efficient, and reliable. 
+![image](https://github.com/user-attachments/assets/8e807945-6fba-4c60-95d6-36d38346a59b)
+
+One key parameter that reflects the robustness of a CMOS inverter is the switching threshold, Vm. This is the point where the input voltage equals the output voltage (Vin = Vout). 
+
+![image](https://github.com/user-attachments/assets/f8fe14dd-26ab-4910-ac7e-27cc7234fca0)
+
+In the graph shown, this occurs around 0.9V. At this point, both the NMOS and PMOS transistors may be partially on, which can cause a direct current path from Vdd to ground, leading to leakage current. This critical point helps in analyzing th the performance and power consumption of CMOS circuits. by  comparing the graphs, we also gain insights into the operating regions of PMOS and NMOS, and understand how current flows differently in each type of transistor depending on the input voltage.
+
 ## Static and dynamic simulation of CMOS inverter
 
-In dynamic simulation of a CMOS inverter, we focus on understanding the rise and fall delay—how quickly the output changes from low to high (rise) and from high to low (fall) in response to a changing input. Unlike the previous simulations that used a DC sweep, this one uses a pulse input signal. Everything else in the setup, including the circuit and component values, remains the same. The simulation command used here is .tran, which stands for transient analysis, allowing us to observe how voltages change over time. 
+In dynamic simulation of a CMOS inverter, we focus on understanding the rise and fall delay how quickly the output changes from low to high (rise) and from high to low (fall) in response to a changing input. Unlike the previous simulations that used a DC sweep, this one uses a pulse input signal.  everything else in the setup, including the circuit and component values, remains the same.  simulation command used here is .tran, which stands for transient analysis, allowing us to observe how voltages change over time. 
+![image](https://github.com/user-attachments/assets/a3bf05cd-2cd2-41a4-9b56-770d4a9a4ad2)
+![image](https://github.com/user-attachments/assets/f73087ee-26ee-4e43-a19d-76bd1517fb46)
 
 From the output, we get a Time vs Voltage graph. By examining this graph, we can measure how long it takes for the output to respond when the input pulse transitions. The rise delay refers to the time taken for the output to go from low to high, while the fall delay is the time taken to drop from high to low. These delays are influenced by factors like the switching threshold (Vm), transistor sizes, and load capacitance. Analyzing them helps us understand the speed performance of the CMOS inverter in real operating conditions. 
+
+
 ## Lab steps to git clone vsdstdcelldesign
 
-To begin, we first clone the GitHub repository by copying the clone address and using it in the terminal with the command git clone. This will create a folder named vsdstdcelldesign inside the openlane directory. If we open the openlane directory now, we’ll see that this new folder has been successfully created. Going inside the vsdstdcelldesign folder, we can find various files such as .mag, library files, and others that are essential for standard cell design. 
-
-To view the layout of the CMOS inverter, we need to open the .mag file using the Magic layout tool. But before doing that, we must copy a required technology file into the same folder using the cp command from the given path. Once the tech file is placed in the vsdstdcelldesign directory, we can directly open the .mag file in Magic without specifying the full path. Upon opening, we can clearly see the layout of the CMOS inverter along with the different layers used in its construction. 
 
 
 ## Inception of layout CMOS fabrication process
