@@ -988,10 +988,50 @@ This final timing check is what we use in real-world STA (Static Timing Analysis
 
 
 
+## Crosstalk and clock net shielding 
+
+![image](https://github.com/user-attachments/assets/63363c2d-1d4c-4c08-8877-2777a5fb77d0)
+
+Clock net shielding is a technique used in chip design to protect the clock signal from external interference. Normally, we build the clock tree so that the delay (or skew) between the launch and capture flip-flops is zero, meaning both receive the clock at the same time. 
+![image](https://github.com/user-attachments/assets/03a07346-34a0-4115-8f2c-baa2ea2bf80e)
+
+if the clock net is left unprotected, it can be affected by nearby signal wires due to something called coupling capacitance. When these nearby wires (called aggressors) switch states, they can create noise or glitches on the clock net (the victim), causing delays—especially when switching from logic '1' to '0'. This is known as delta delay and it disturbs the perfect synchronization of the clock, making the skew non-zero. To prevent this, we use shielding, where grounded or powered wires are placed between signal wires to block this interference. These shielding wires don’t switch, which helps break the coupling path and protect the clock net from glitches and delay. 
+
+We saw tht the amount of delta delay because of the bump when we are switching from logic '1' to logic '0'. And skew is not anymore 0 here. So the impact of crosstalk delta delay is that it make the skew value non-zero.
+![image](https://github.com/user-attachments/assets/756e3ccc-83da-42ce-bfe5-c01e051ebc66)
 
 
+## Timing analysis with real clock using openSTA 
+
+## Setup timing analysis using real clocks 
+
+In real-world circuits, the clock signal doesn't reach flip-flops instantly like in an ideal case because it travels through buffers and wires, which introduce delay. So, the clock reaches the launch and capture flip-flops at different times due to these elements. This changes our timing analysis. Originally, we used a simple condition like θ < T, but now we have to account for delays.
+![image](https://github.com/user-attachments/assets/3c0d6bfe-85d5-4a40-afdd-c5cc352db28c)
+
+We call the delay on the launch side  as ∆1, and on the capture side  as ∆2. The difference between them (∆1 - ∆2) is known as skew. Also, we must include factors like propagation skew (s) and clock uncertainty . So, the setup timing equation becomes (θ + ∆1) < (T + ∆2 - s - US)
+![image](https://github.com/user-attachments/assets/58e24856-c3a5-4844-a046-90f48adbca02)
+
+where the left side is the data arival time and the right side is the data required time. If required time minus arrival time is positive, the setup is valid and if it's negative, we call it a negative slack. For hold timing, the analysis is a bit different. It checks that the data remains stable long enough after the clock edge.
+![image](https://github.com/user-attachments/assets/048b9de3-deff-4d4d-8dfa-67f0462e9383)
+
+The basic condition is θ > H, meaning the combinational delay must be greater than the hold time. But in real clocks, we again include the delay paths, so the equation becomes (θ + ∆1) > (H + ∆2). This ensures data is correctly latched at the capture flip-flop. 
+![image](https://github.com/user-attachments/assets/8fbf7a75-865b-4200-a197-a691a5ebb709)
 
 
+## Hold timing analysis using real clocks 
+![image](https://github.com/user-attachments/assets/7614e52e-23a1-47c2-9554-73a56175326f)
+
+For proper hold timing, the combinational delay must be greater than the hold time of the capture flip-flop. When the clock reaches the launch flip-flop, it passes through about two buffers (∆1), and when it reaches the capture flip-flop, it goes through around three buffers (∆2). Since both flops receive the clock from the same source, the clock uncertainty is the same for both. Adding this uncertainty, we analyze the timing by checking the slack, which is the difference between data arrival time and data required time. Slack should always be positive or zero—if it's negative, it indicates a violation.the timing paths from design, with single clock
+
+![image](https://github.com/user-attachments/assets/65896c0c-c80b-443c-86bc-4cb355f1742c)
+
+ 
+
+ 
+
+ 
+
+ 
 
 
 
@@ -1080,29 +1120,35 @@ In some cases, like when signals get shorted, the solution is to move one wire t
 
 ## Basics of global and detail routing and configure TritonRoute 
 
-The final step in the physical design process is routing. After generating the PDN, the DEF file—named 17-pdn.def—now includes both clock and power information from the earlier steps like cts.def. To explore different routing options or switches, you can check the README.md file in the configuration folder of the OpenLANE directory. If needed, routing types can be changed using specific set commands, though in this case, the default settings are used. The routing process begins with the command run_routing and is divided into two main stages: Global Routing and Detailed Routing. In global routing, the chip layout is divided into rectangular grid cells, forming a 3D routing graph, and this step is handled by the FastRoute engine. The next step, detailed routing, is done by the TritonRoute engine, which finalizes the exact wire paths. For example, pins A, B, C, and D are connected to form a net through this process, ensuring all connections are accurately made on the chip. 
+routing process is divided into two main stages: Global Routing and Detailed Routing.
+![image](https://github.com/user-attachments/assets/a6426fa7-9313-477e-8c8c-d091e1a31d52)
 
- 
+In global routing, the chip layout is divided into rectangular grid cells, forming a 3D routing graph, and this step is handled by the FastRoute engine.in detailed routing, is done by the TritonRoute engine which finalizes the exact wire paths. For example, pins A, B, C, and D are connected to form a net through this process, ensuring all connections are accurately made on the chip. 
 
- 
 
-TritonRoute Features 
+## TritonRoute Features 
 
-TritonRoute feature 1 - Honors pre-processed route guides 
+## TritonRoute feature 1 - Honors pre-processed route guides 
+![image](https://github.com/user-attachments/assets/c60addae-7408-4505-a25f-4d820633c2a7)
 
-The initial detailed routing step follows the route guides that were created during the fast routing stage. These route guides act as a blueprint, showing where each wire should go. To work properly, these guides must meet a few conditions: they should have a uniform width, follow the preferred routing direction for each layer, and ensure that all parts of a net are connected. Two guides are considered connected if they either touch on the same metal layer or overlap vertically on adjacent layers. The detailed router uses a smart technique called MILP-based panel routing, where routing happens in parallel within a layer and sequentially between layers, helping to make the process more efficient and organized. 
+The initial detailed routing step follows the route guides that were created during the fast routing stage. These route guides act as a blueprint, showing where each wire should go. To work properly, these guides must meet a few conditions  1) they should have a uniform width, 2) follow the preferred routing direction for each layer, and ensure that all parts of a net are connected.  2guides are considered connected if they either touch on the same metal layer or overlap vertically on adjacent layers. The detailed router uses a smart technique called MILP-based panel routing, where  routing happens in parallel within a layer and sequentially between layers, helping to make the process more efficient and organized. 
 
-TritonRoute Feature2 & 3 - Inter-guide connectivity and intra- & inter-layer routing 
+## TritonRoute Feature2 & 3 - Inter-guide connectivity and intra- & inter-layer routing 
+
+![image](https://github.com/user-attachments/assets/4fbd795a-e382-41aa-801b-33ae84d43fa8)
 
 In detailed routing, every unconnected pin of a standard cell must be covered by a route guide to ensure it gets properly connected. As shown in the image, the black dots represent cell pins, and these are overlapped by the route guides, especially when the pins are placed at the intersection of vertical and horizontal routing tracks. This overlap helps ensure correct routing. The routing strategy used here is called intra-layer parallel and inter-layer sequential panel routing. "Intra-layer" means routing happens within a single metal layer, and "inter-layer" means it occurs between different layers. For example, looking at Metal 2 (M2), which has vertical routing, the layer is divided into strips called panels. Routing is done in parallel across panels with even indices first, then in the odd ones, all within the same layer. This pattern is repeated layer by layer—like in Metal 3 (M3)—where panels are also routed in parallel, first in the even panels (shown in part b) and then in the odd panels (shown in part c), completing the routing in a structured and efficient way. 
 
-TritonRoute method to handle connectivity  
+## TritonRoute method to handle connectivity  
 
-In detailed routing, the input is the LEF file, and the output is a complete routing solution that aims to minimize wire length and the number of vias. This process must follow several constraints, such as sticking to the provided route guides, ensuring all connections are made properly, and following the design rules. To manage connectivity, the router works within a defined routing space and uses specific points called Access Points (APs)—these are grid-aligned spots on metal layers used to connect wires either to other layers, to pins, or to I/O ports. A group of these related access points is called an Access Point Cluster (APC), and it collects all APs tied to the same source, like a pin or guide. The illustration shows examples of access points connecting to (a) a lower-layer segment, (b) a pin, and (c) an upper-layer segment, helping ensure smooth and rule-compliant routing throughout the design. 
+![image](https://github.com/user-attachments/assets/0a9ea93a-a47c-4fe6-b616-1f857c626990)
 
-Routing topology algorithm and final files list post-route 
+In detailed routing, the input is the LEF file, and the output is a complete routing solution that aims to minimize wire length and the number of vias. This process must follow several constraints, such as sticking to the provided route guides, ensuring all connections are made properly, and following the design rules. To manage connectivity, the router works within a defined routing space and usef specific points called Access Points (APs)those are grid aligned spot on metal layers used to connect wires either to other layers, to pins, or to IO ports. A group of these related access points is called an Access Point Cluster (APC), and it collects all APs tied to the same source, like a pin or guide. The pic shows examples of access points connecting to (a) a lower-layer segment, (b) a pin, and (c) an upper-layer segment, helping ensure smooth and rule-compliant routing throughout the design. 
 
-To complete detailed routing efficiently, the algorithm calculates the cost of each Access Point Cluster (APC) and then finds the best connections by building a minimum spanning tree between them. This helps in selecting the optimal routing paths. After routing is done, a post-routing Static Timing Analysis (STA) is performed, which requires extracting parasitic effects like resistance and capacitance. This extraction is done using a Standard Parasitic Exchange Format (.spef) file. Since OpenLANE doesn’t include a built-in SPEF extractor, this step is carried out externally. Once generated, the .spef file is saved in the `routing` folder inside the `results` directory. Finally, the complete and routed chip layout is produced, showing the physical design ready for further analysis or fabrication. 
+##Routing topology algorithm and final files list post-route 
+![image](https://github.com/user-attachments/assets/b806c4b8-0c11-4b86-86b1-8871030b2a20)
+
+To complete detaild routing efficiently, the algorithm calculates the cost of each Access Point Cluster (APC) and then finds the best connections by building a minimum spanning tree between them. This helps in selecting the optimal routing paths. 
 
  
 
