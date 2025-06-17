@@ -213,7 +213,7 @@ command --help : shows the complete use that command
 
 clear : clears the terminal screen
 
-## LAB DAY 1
+# LAB DAY 1
 ### 1.Run 'picorv32a' design synthesis using OpenLANE flow and generate necessary outputs.
  > SCREENSHOTS OF LAB ATTACHED BELOW.
 
@@ -364,7 +364,7 @@ The complete design now has six input ports: Din1, Din2, Din3, Din4, Clk1, and C
 We now place the netlist inside the core that was designed earlier and aim to fill the empty space between the core and the die using pin information. The frontend team is responsible for defining the netlist, including all input and output connections, while the backend team handles the physical placement of pins. Based on where the pins are placed, we need to position the preplaced blocks close to their respective input sources. This ensures efficient routing and better performance in the overall layout.
 
 
-## LAB DAY 2
+# LAB DAY 2
 
 1.Run 'picorv32a' design floorplan using OpenLANE flow and generate necessary outputs.
 
@@ -470,7 +470,7 @@ step 6: static timing analysis : to analyse what is setup time ,old time,what is
 
 one thing common accross all stages are gates or cells
 
-## LAB DAY 2 (BALANCE)
+# LAB DAY 2 (BALANCE)
 5.Load generated placement def in magic tool and explore the placement.
 
 Commands used:
@@ -642,7 +642,6 @@ In dynamic simulation of a CMOS inverter, we focus on understanding the rise and
 From the output, we get a Time vs Voltage graph. By examining this graph, we can measure how long it takes for the output to respond when the input pulse transitions. The rise delay refers to the time taken for the output to go from low to high, while the fall delay is the time taken to drop from high to low. These delays are influenced by factors like the switching threshold (Vm), transistor sizes, and load capacitance. Analyzing them helps us understand the speed performance of the CMOS inverter in real operating conditions. 
 
 
-## Lab steps to git clone vsdstdcelldesign
 
 
 
@@ -866,7 +865,7 @@ This second metal layer is thicker for carrying more current.Finally, we deposit
 ![image](https://github.com/user-attachments/assets/28051df2-427f-4a7a-b15c-c9e088f24cf7)
 
 
-## LAB DAY 3
+# LAB DAY 3
 ### COMMANDS:
 
 ![Capture 21](https://github.com/user-attachments/assets/15048b0a-9dea-4966-9ab1-9876b0da422c)
@@ -896,7 +895,15 @@ This second metal layer is thicker for carrying more current.Finally, we deposit
 ![Capture 34](https://github.com/user-attachments/assets/c43e244f-7da5-4f34-a2b6-999d5aed60bb)
 
 
+![Capture d](https://github.com/user-attachments/assets/cf66a6d9-4647-4e9b-ba66-69a5ed5309f3)
+![Capture a](https://github.com/user-attachments/assets/342020b5-9c5a-4b8b-98a9-fd6cd704c710)
+![Capture e](https://github.com/user-attachments/assets/597ba8f9-4cb3-4265-9da0-6a5f46f024ea)
 
+![Capture b](https://github.com/user-attachments/assets/ac14d3c4-ade5-48f9-8f80-33ab0b0905f9)
+![Capture 101](https://github.com/user-attachments/assets/550f44db-a430-4900-843e-9e8d0f970d9c)
+![image](https://github.com/user-attachments/assets/e6335e98-2a01-4715-b846-4e7613de8a58)
+
+![image](https://github.com/user-attachments/assets/7d950e41-4f1b-4875-bcd0-959249a4a771)
 
 
 #Sky130 Day 4 - Pre-layout timing analysis and importance of good clock tree
@@ -921,6 +928,7 @@ Consider a scenario where a buffer in a clock tree is driving two other buffers.
 Before performing this replacement (buffer with logic gate), certain assumptions are made about the circuit for simplification. These include assuming equal capacitance at various points in the circuit:
 
 Capacitance at nodes C1, C2, C3, and C4 is assumed to be 25 fF each.
+
 
 Capacitance of buffers BUF1 and BUF2 is taken as 30 fF each.
 
@@ -1027,40 +1035,6 @@ For proper hold timing, the combinational delay must be greater than the hold ti
 
  
 
- 
-
- 
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # sky130 Day 5-final steps for RTL2GDS using tritonRoute and openSTA
 ## Routing and design rule check (DRC) 
@@ -1111,12 +1085,6 @@ In some cases, like when signals get shorted, the solution is to move one wire t
 
 ## Power Distribution Network and routing 
 
-## Lab steps to build power distribution network 
-
-
-## Lab steps from power straps to std cell power 
-
-
 
 ## Basics of global and detail routing and configure TritonRoute 
 
@@ -1152,6 +1120,8 @@ To complete detaild routing efficiently, the algorithm calculates the cost of ea
 
  
 
+ # LAB DAY 5
  
 
- 
+ ![1](https://github.com/user-attachments/assets/3ef94ba9-b0de-467d-b66b-09ecf543ea72)
+
