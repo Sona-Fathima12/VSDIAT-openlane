@@ -866,6 +866,7 @@ This second metal layer is thicker for carrying more current.Finally, we deposit
 
 
 # LAB DAY 3
+## Lab introduction to Sky130 basic layers and lef using inverter
 ### COMMANDS:
 
 ![Capture 21](https://github.com/user-attachments/assets/15048b0a-9dea-4966-9ab1-9876b0da422c)
@@ -894,16 +895,25 @@ This second metal layer is thicker for carrying more current.Finally, we deposit
 ### Measuring unit diatance in the layout after grind on in the windows:
 ![Capture 34](https://github.com/user-attachments/assets/c43e244f-7da5-4f34-a2b6-999d5aed60bb)
 
+### commands for ngspice simulation
+![14 PIC](https://github.com/user-attachments/assets/e5d07f88-3070-405b-a53b-08d2c09e7645)
 
-![Capture d](https://github.com/user-attachments/assets/cf66a6d9-4647-4e9b-ba66-69a5ed5309f3)
-![Capture a](https://github.com/user-attachments/assets/342020b5-9c5a-4b8b-98a9-fd6cd704c710)
-![Capture e](https://github.com/user-attachments/assets/597ba8f9-4cb3-4265-9da0-6a5f46f024ea)
+### spice file for ngspice simulation
+![15N PIC](https://github.com/user-attachments/assets/0647968e-0fe7-4314-805a-dadd726dfa6a)
+![16N PIC](https://github.com/user-attachments/assets/825856aa-2de4-42a9-8a6f-0fe13744f14d)
 
-![Capture b](https://github.com/user-attachments/assets/ac14d3c4-ade5-48f9-8f80-33ab0b0905f9)
-![Capture 101](https://github.com/user-attachments/assets/550f44db-a430-4900-843e-9e8d0f970d9c)
-![image](https://github.com/user-attachments/assets/e6335e98-2a01-4715-b846-4e7613de8a58)
+output:
+![17 PIC](https://github.com/user-attachments/assets/75d4a43b-95b6-4ab1-8b0c-345bc90a89cb)
 
-![image](https://github.com/user-attachments/assets/7d950e41-4f1b-4875-bcd0-959249a4a771)
+### if we change C3 value to 0.2fF
+![18 PIC](https://github.com/user-attachments/assets/e8b1f79c-013a-4bc3-8310-ccbbf1845647)
+![19 PIC](https://github.com/user-attachments/assets/5ce7e494-ea53-4842-8a82-77f54ad0a2f1)
+
+WE GET AN EVEN MORE SMOOTHER GRAPH
+
+![20 PIC](https://github.com/user-attachments/assets/04e4992f-0465-495a-a53c-297931d9a2e6)
+
+
 
 
 #Sky130 Day 4 - Pre-layout timing analysis and importance of good clock tree
