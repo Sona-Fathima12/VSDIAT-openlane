@@ -913,6 +913,18 @@ WE GET AN EVEN MORE SMOOTHER GRAPH
 
 ![20 PIC](https://github.com/user-attachments/assets/04e4992f-0465-495a-a53c-297931d9a2e6)
 
+### Rise transition time calculations
+
+![WhatsApp Image 2025-06-18 at 10 13 29 PM](https://github.com/user-attachments/assets/de645b5b-ce4e-4df5-8131-5f83ca6ed967)
+
+
+![WhatsApp Image 2025-06-18 at 10 13 53 PM](https://github.com/user-attachments/assets/39e866f0-02f6-4e11-b16a-5c8451af672c)
+
+
+![WhatsApp Image 2025-06-18 at 10 14 22 PM](https://github.com/user-attachments/assets/c0a29994-cf06-408d-ad67-d0d335f4a639)
+
+
+![WhatsApp Image 2025-06-18 at 10 14 54 PM](https://github.com/user-attachments/assets/d933c87d-21e0-4625-8a6d-36b960c20f09)
 
 
 
