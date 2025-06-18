@@ -1125,3 +1125,10 @@ To complete detaild routing efficiently, the algorithm calculates the cost of ea
 
  ![1](https://github.com/user-attachments/assets/3ef94ba9-b0de-467d-b66b-09ecf543ea72)
 
+## Acknowledgements
+
+Kunal Ghosh, Co-founder, VSD Corp. Pvt. Ltd.
+
+Nickson P Jose, Physical Design Engineer, Intel Corporation.R. 
+
+Timothy Edwards, Senior Vice President of Analog and Design, efabless Corporation.
