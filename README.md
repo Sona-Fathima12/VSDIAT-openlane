@@ -971,8 +971,34 @@ you can see black squares (VIA2) appear in the layout.
 ![29 PIC](https://github.com/user-attachments/assets/bc1d1e47-ab0c-43d5-8a47-d51772e4b68a)
 
 To find the error  look at the sky130A.tech file which is present in the drc_tests directory.
+and added changes in it
+![32 pic](https://github.com/user-attachments/assets/437590c6-1210-4a2c-b523-4f3104f412aa)
+![33 pic](https://github.com/user-attachments/assets/66afa47e-2102-4e62-94e5-f8c9d992fa3b)
 
-![30 PIC](https://github.com/user-attachments/assets/1099a86e-bffd-4542-8d4e-2f90a7ddcd4f)
+the command tech load sky130A.tech in the tkcon terminal.then drc check
+
+![34 pic](https://github.com/user-attachments/assets/2fa04d21-1f8a-4e00-bba2-c9f0e3b38185)
+
+for correctly implement poly resistor spacing : add few more changes and save
+![35 pic](https://github.com/user-attachments/assets/8fbeb590-be36-4b70-a4c4-60f542fffba6)
+![36 pic](https://github.com/user-attachments/assets/179ed38f-ad84-42df-b386-8ccafeedea73)
+![37 pic](https://github.com/user-attachments/assets/ce844794-ff15-4a22-90dd-2f84ce47506b)
+
+then we will make some changes in sky130A.tech file which are as follow
+
+
+![38pic](https://github.com/user-attachments/assets/df01b630-c200-451e-9cf9-cfa3eddc590a)
+![39pic](https://github.com/user-attachments/assets/96bb609d-448e-4185-9164-7345d2be7813)
+
+To find the nwell.6 model error, open the nwell.mag file in the magic tool. In the figure, the deep nwell is shown in yellow stripes and the nwell is shown in dotted green  pattern.
+![40 pic](https://github.com/user-attachments/assets/7abac196-4935-4049-b20e-b68640fb65c3)
+
+the error is:
+![41pic](https://github.com/user-attachments/assets/7683057d-4c64-494c-a50a-7020666ffb1f)
+
+then we will open the magic tool and execute the commands drc style drc(full) and drc check.
+![42pic](https://github.com/user-attachments/assets/324d096b-2ab7-4af9-b14e-a46371e12873)
+
 
 
 
