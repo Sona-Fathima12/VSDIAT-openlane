@@ -926,6 +926,58 @@ WE GET AN EVEN MORE SMOOTHER GRAPH
 
 ![WhatsApp Image 2025-06-18 at 10 14 54 PM](https://github.com/user-attachments/assets/d933c87d-21e0-4625-8a6d-36b960c20f09)
 
+To know more about the Magic DRC we can go to the website:- http://opencircuitdesign.com/magic/Technologyfiles/TheMagicTechnologyFileManual/DrcSection
+
+Link to Google_Skywaters Design Rules: - https://skywater-pdk.readthedocs.io/en/main/rules/periphery.html
+
+For reference , we can use the github repo of Google-Skywater: - https://github.com/google/skywater-pdk
+
+
+### Commands 
+wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
+
+To extract the lab files from the downloaded file:tar xfz drc_tests.tgz
+
+Go into the lab folder:cd drc_tests
+
+See all files and folders (even hidden ones):ls -al
+
+Open the .magicrc file:gvim .magicrc
+
+![21 PIC](https://github.com/user-attachments/assets/ba4542e3-a57b-4d7e-bdf8-31c0ad59438e)Content of .magicrc file
+###Content of .magicrc file: vi .magicrc
+![22 PIC](https://github.com/user-attachments/assets/f3dd88d7-8e7a-4e6a-b49b-fc9742186d13)
+
+![23 PIC](https://github.com/user-attachments/assets/6791b1cd-4338-451e-be35-bc38a97fdff8)
+
+command: magic -d XR
+
+![24 PIC](https://github.com/user-attachments/assets/14c2f392-40af-4719-a0b2-![25 PIC](https://github.com/user-attachments/assets/e759775e-45d6-415d-b568-327b4558fd3f)
+1b7f5c8f438a)
+### select the any layout area and check drc why
+
+![26 PIC](https://github.com/user-attachments/assets/3ec75290-9498-4314-8a2a-158716302eb4)
+
+then click on a blank area in Magic.and move the mouse over the metal3 contact icon.and press p on the keyboard.then type **paint pek** in tkon window then type **cif see VIA2**
+you can see black squares (VIA2) appear in the layout.
+
+![26Q PIC](https://github.com/user-attachments/assets/08b2b6fd-46cf-4482-942b-09c1e76e2283)
+
+### open the poly.mag file:load poly.mag
+
+![27 PIC](https://github.com/user-attachments/assets/c65f8dd8-747d-4330-a734-1bc46e6eede6)
+
+![28 PIC](https://github.com/user-attachments/assets/dd740c2c-b2ee-425a-a009-649a17c29cea)
+![29 PIC](https://github.com/user-attachments/assets/bc1d1e47-ab0c-43d5-8a47-d51772e4b68a)
+
+To find the error  look at the sky130A.tech file which is present in the drc_tests directory.
+
+![30 PIC](https://github.com/user-attachments/assets/1099a86e-bffd-4542-8d4e-2f90a7ddcd4f)
+
+
+
+
+
 
 
 #Sky130 Day 4 - Pre-layout timing analysis and importance of good clock tree
