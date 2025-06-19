@@ -926,34 +926,34 @@ WE GET AN EVEN MORE SMOOTHER GRAPH
 
 ![WhatsApp Image 2025-06-18 at 10 14 54 PM](https://github.com/user-attachments/assets/d933c87d-21e0-4625-8a6d-36b960c20f09)
 
-To know more about the Magic DRC we can go to the website:- http://opencircuitdesign.com/magic/Technologyfiles/TheMagicTechnologyFileManual/DrcSection
+### Lab introduction to Sky130 pdk's and steps to download labs
+To know more about the Magic DRC we can go to the website:-  http://opencircuitdesign.com/magic/Technologyfiles/TheMagicTechnologyFileManual/DrcSection
 
-Link to Google_Skywaters Design Rules: - https://skywater-pdk.readthedocs.io/en/main/rules/periphery.html
+Link to Google_Skywaters Design Rules: -  https://skywater-pdk.readthedocs.io/en/main/rules/periphery.html
 
-For reference , we can use the github repo of Google-Skywater: - https://github.com/google/skywater-pdk
+For reference , we can use the github repo of Google-Skywater: -  https://github.com/google/skywater-pdk
 
 
 ### Commands 
 wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
 
-To extract the lab files from the downloaded file:tar xfz drc_tests.tgz
+1.To extract the lab files from the downloaded file:tar xfz drc_tests.tgz
 
-Go into the lab folder:cd drc_tests
+2.Go into the lab folder:cd drc_tests
 
-See all files and folders (even hidden ones):ls -al
+3.See all files and folders (even hidden ones):ls -al
 
-Open the .magicrc file:gvim .magicrc
+4.Open the .magicrc file:gvim .magicrc
 
-![21 PIC](https://github.com/user-attachments/assets/ba4542e3-a57b-4d7e-bdf8-31c0ad59438e)Content of .magicrc file
+![21 PIC](https://github.com/user-attachments/assets/ba4542e3-a57b-4d7e-bdf8-31c0ad59438e)
 ###Content of .magicrc file: vi .magicrc
 ![22 PIC](https://github.com/user-attachments/assets/f3dd88d7-8e7a-4e6a-b49b-fc9742186d13)
 
 ![23 PIC](https://github.com/user-attachments/assets/6791b1cd-4338-451e-be35-bc38a97fdff8)
-
+### Lab introduction to Magic and steps to load Sky130 tech-rules
 command: magic -d XR
+![24 PIC](https://github.com/user-attachments/assets/5f86a98c-727c-47fa-9fd8-5b8b6cd76b37)
 
-![24 PIC](https://github.com/user-attachments/assets/14c2f392-40af-4719-a0b2-![25 PIC](https://github.com/user-attachments/assets/e759775e-45d6-415d-b568-327b4558fd3f)
-1b7f5c8f438a)
 ### select the any layout area and check drc why
 
 ![26 PIC](https://github.com/user-attachments/assets/3ec75290-9498-4314-8a2a-158716302eb4)
@@ -962,7 +962,7 @@ then click on a blank area in Magic.and move the mouse over the metal3 contact i
 you can see black squares (VIA2) appear in the layout.
 
 ![26Q PIC](https://github.com/user-attachments/assets/08b2b6fd-46cf-4482-942b-09c1e76e2283)
-
+### Lab exercise to fix poly.9 error in Sky130 tech-file
 ### open the poly.mag file:load poly.mag
 
 ![27 PIC](https://github.com/user-attachments/assets/c65f8dd8-747d-4330-a734-1bc46e6eede6)
@@ -978,12 +978,13 @@ and added changes in it
 the command tech load sky130A.tech in the tkcon terminal.then drc check
 
 ![34 pic](https://github.com/user-attachments/assets/2fa04d21-1f8a-4e00-bba2-c9f0e3b38185)
-
+### Lab exercise to implement poly resistor spacing to diff and tap
 for correctly implement poly resistor spacing : add few more changes and save
 ![35 pic](https://github.com/user-attachments/assets/8fbeb590-be36-4b70-a4c4-60f542fffba6)
 ![36 pic](https://github.com/user-attachments/assets/179ed38f-ad84-42df-b386-8ccafeedea73)
 ![37 pic](https://github.com/user-attachments/assets/ce844794-ff15-4a22-90dd-2f84ce47506b)
 
+### Lab challenge exercise to describe DRC error as geometrical construct
 then we will make some changes in sky130A.tech file which are as follow
 
 
@@ -996,6 +997,7 @@ To find the nwell.6 model error, open the nwell.mag file in the magic tool. In t
 the error is:
 ![41pic](https://github.com/user-attachments/assets/7683057d-4c64-494c-a50a-7020666ffb1f)
 
+### Lab challenge to find missing or incorrect rules and fix them
 then we will open the magic tool and execute the commands drc style drc(full) and drc check.
 ![42pic](https://github.com/user-attachments/assets/324d096b-2ab7-4af9-b14e-a46371e12873)
 
