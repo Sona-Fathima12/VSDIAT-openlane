@@ -1006,8 +1006,8 @@ then we will open the magic tool and execute the commands drc style drc(full) an
 
 
 
-#Sky130 Day 4 - Pre-layout timing analysis and importance of good clock tree
-##Timing modelling using delay tables
+# Sky130 Day 4 - Pre-layout timing analysis and importance of good clock tree
+## Timing modelling using delay tables
 ## Introduction to delay tables
 
 ![image](https://github.com/user-attachments/assets/2c20c7fa-6ef7-49f6-bfb5-e52ef8dc047f)
@@ -1134,7 +1134,32 @@ For proper hold timing, the combinational delay must be greater than the hold ti
 ![image](https://github.com/user-attachments/assets/65896c0c-c80b-443c-86bc-4cb355f1742c)
 
  
+# LAB DAY 4
+Fix up small DRC errors and verify the design is ready to be inserted into our flow.
 
+Save the finalized layout with custom name and open it.
+
+Generate lef from the layout.
+
+Copy the newly generated lef and associated required lib files to 'picorv32a' design 'src' directory.
+
+Edit 'config.tcl' to change lib file and add the new extra lef into the openlane flow.
+
+Run openlane flow synthesis with newly inserted custom inverter cell.
+
+Remove/reduce the newly introduced violations with the introduction of custom inverter cell by modifying design parameters.
+
+Once synthesis has accepted our custom inverter we can now run floorplan and placement and verify the cell is accepted in PnR flow.
+
+Do Post-Synthesis timing analysis with OpenSTA tool.
+
+Make timing ECO fixes to remove all violations.
+
+Replace the old netlist with the new netlist generated after timing ECO fix and implement the floorplan, placement and cts.
+
+Post-CTS OpenROAD timing analysis.
+
+Explore post-CTS OpenROAD timing analysis by removing 'sky130_fd_sc_hd__clkbuf_1' cell from clock buffer list variable 'CTS_CLK_BUFFER_LIST'.
 
 # sky130 Day 5-final steps for RTL2GDS using tritonRoute and openSTA
 ## Routing and design rule check (DRC) 
