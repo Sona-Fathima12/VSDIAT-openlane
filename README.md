@@ -917,14 +917,48 @@ WE GET AN EVEN MORE SMOOTHER GRAPH
 
 ![WhatsApp Image 2025-06-18 at 10 13 29 PM](https://github.com/user-attachments/assets/de645b5b-ce4e-4df5-8131-5f83ca6ed967)
 
+Rise Transition Time Calculation 
+
+Rise Transition Time = Time taken for output to rise to 80% - Time taken for output to rise to rise to 20% 
+
+20 % of output = 660mV 
+
+80% of output = 2.64V 
 
 ![WhatsApp Image 2025-06-18 at 10 13 53 PM](https://github.com/user-attachments/assets/39e866f0-02f6-4e11-b16a-5c8451af672c)
 
+Rise transition Time = 2.24638 – 2.18242 = 0,06396 ns = 63.96 ps 
+
+Fall Transition Time Calculation  
+
+Fall Transition Time = Time taken for output to fall to 20% - Time taken for output to fall to 80% 
+
+20 % of output = 660mV 
+
+80% of output = 2.64V 
 
 ![WhatsApp Image 2025-06-18 at 10 14 22 PM](https://github.com/user-attachments/assets/c0a29994-cf06-408d-ad67-d0d335f4a639)
 
+Fall Transition Time = 4.0955 – 4.0536 = 0.0419 ns = 41.9 ps 
+
+Rise Cell Delay Calculation 
+
+Rise Cell Delay = Time taken for output to rise to 50 % - Time taken for input to fall to 50% 
+
+50 % of 3.3 V = 1.65 V 
 
 ![WhatsApp Image 2025-06-18 at 10 14 54 PM](https://github.com/user-attachments/assets/d933c87d-21e0-4625-8a6d-36b960c20f09)
+
+Rise Cell Delay = 2.2144 – 2.15008 = 0.06136 ns = 61.36 ps 
+
+Fall Cell Delay Calculation  
+
+Fall Cell Delay = Time Taken For Output to Fall to 50% - Time taken for input to rise to 50 % 
+
+50 % of 3.3V = 1.65 V 
+
+Fall Cell Delay = 4.07 – 4.05 = 0.02 ns = 20 ps 
+
 
 ### Lab introduction to Sky130 pdk's and steps to download labs
 To know more about the Magic DRC we can go to the website:-  http://opencircuitdesign.com/magic/Technologyfiles/TheMagicTechnologyFileManual/DrcSection
@@ -1137,21 +1171,76 @@ For proper hold timing, the combinational delay must be greater than the hold ti
 
  
 # LAB DAY 4
-Fix up small DRC errors and verify the design is ready to be inserted into our flow.
+### Fix up small DRC errors and verify the design is ready to be inserted into our flow.
+commands:
 
-Save the finalized layout with custom name and open it.
+![50 pic](https://github.com/user-attachments/assets/6e2d808c-b64c-4213-8bd4-493dc2618911)
 
-Generate lef from the layout.
 
-Copy the newly generated lef and associated required lib files to 'picorv32a' design 'src' directory.
+tracks.info of sky130_fd_sc_hd
 
-Edit 'config.tcl' to change lib file and add the new extra lef into the openlane flow.
+![51 pic](https://github.com/user-attachments/assets/d1307430-4457-4561-a024-d8739f0cb5ce)
 
-Run openlane flow synthesis with newly inserted custom inverter cell.
+commands for tkon window:
 
-Remove/reduce the newly introduced violations with the introduction of custom inverter cell by modifying design parameters.
+![52 pic](https://github.com/user-attachments/assets/935ed670-cf22-415a-96d2-ad0afc19a43b)
 
-Once synthesis has accepted our custom inverter we can now run floorplan and placement and verify the cell is accepted in PnR flow.
+i/p and o/p ports of std cell lie on the intersection of vertical and horizontal tracks
+
+![53 pic](https://github.com/user-attachments/assets/01151fd6-2fdf-450a-9501-1d9542a580c3)
+
+calculations:
+![53 1 pic](https://github.com/user-attachments/assets/bc93ddab-9e30-4290-8949-f7eeec08a062)
+### Horizontal Track Pitch: 0.46 um
+### Vertical Track Pitch:0.34 um
+### Width of Standard Cell: 1.77 um
+### Height of Standard Cell: 3.28 um
+
+### Save the finalized layout with custom name and open it.
+![53 1 pic](https://github.com/user-attachments/assets/933bbe29-1204-4abc-a683-d75e87979bbc)
+
+command to open newly opened layout:
+
+![54 pic](https://github.com/user-attachments/assets/75d1b606-aacf-4cd5-9bfb-e3120ddeb9da)
+
+new layout:
+
+![55 pic](https://github.com/user-attachments/assets/5d961e89-8c0b-4a05-8924-0eb5c0be20ca)
+
+### Generate lef from the layout.
+command at tkon window:
+![56 pic](https://github.com/user-attachments/assets/197faf93-785d-434b-97c0-cee3f0df1aff)
+
+newly created lef:
+![57 pic](https://github.com/user-attachments/assets/96922d7c-618c-4f9f-b1d9-8a074db14a97)
+
+### Copy the newly generated lef and associated required lib files to 'picorv32a' design 'src' directory.
+commands:
+![58 pic](https://github.com/user-attachments/assets/e9f08270-d3c5-41ef-b2ee-2b90c5b0b3fc)
+
+### Edit 'config.tcl' to change lib file and add the new extra lef into the openlane flow.
+![59 pic](https://github.com/user-attachments/assets/8823c29c-b5da-422c-ba16-5d9c220e3f23)
+
+### Run openlane flow synthesis with newly inserted custom inverter cell.
+![60 pic](https://github.com/user-attachments/assets/ecc498fd-8645-407e-96cd-3949a557729d)
+![61 pic](https://github.com/user-attachments/assets/3fbe3dee-a2ff-43ec-9217-366eba2acf99)
+![63 pic](https://github.com/user-attachments/assets/b0be4e7e-9562-4fdc-a1b9-e661f28ebf5a)
+
+### Remove/reduce the newly introduced violations with the introduction of custom inverter cell by modifying design parameters.
+![62 pic](https://github.com/user-attachments/assets/336e62c2-9fc9-4486-af79-9f9d408dd245)
+![63 pic](https://github.com/user-attachments/assets/b621bcae-06e0-407e-8933-52d0eeb12c8f)
+
+image of merged.lef in tmp directory:
+![64pic](https://github.com/user-attachments/assets/06a38b8b-fdb4-43a6-85a8-17d0e6273aa8)
+
+commands to view and chnge parameters to improve timing and run synthesis:
+![65 pic](https://github.com/user-attachments/assets/83c41a63-8068-488f-a756-c3e567ff842b)
+![66 pic](https://github.com/user-attachments/assets/f77e39d9-3c6f-4e86-a4b9-0e37ccb8e6f2)
+![67 pic](https://github.com/user-attachments/assets/ea9f8dca-5043-4031-bc75-3c805e08fab6)
+![68 pic](https://github.com/user-attachments/assets/d88971b5-6621-4ab1-b739-92a3290a730b)
+
+### Once synthesis has accepted our custom inverter we can now run floorplan and placement and verify the cell is accepted in PnR flow.
+![69 pic](https://github.com/user-attachments/assets/dde79d92-925e-468e-acb7-afd43c73bfd7)
 
 Do Post-Synthesis timing analysis with OpenSTA tool.
 
