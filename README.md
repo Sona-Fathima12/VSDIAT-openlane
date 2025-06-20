@@ -1244,8 +1244,31 @@ commands to view and chnge parameters to improve timing and run synthesis:
 
 ### Once synthesis has accepted our custom inverter we can now run floorplan and placement and verify the cell is accepted in PnR flow.
 ![69 pic](https://github.com/user-attachments/assets/dde79d92-925e-468e-acb7-afd43c73bfd7)
+![70 pic](https://github.com/user-attachments/assets/4ad7393e-fbdd-4b87-8090-f66f1b630024)
 
-Do Post-Synthesis timing analysis with OpenSTA tool.
+it shows error.so we use following commands and run it(shown the screen shot of commands run:
+![71 pic](https://github.com/user-attachments/assets/d0a3f3ac-d48f-4a95-a15b-dbd9fc8e9537)
+![72 pic](https://github.com/user-attachments/assets/2fb54b9a-70ad-4969-aafb-0e0f3f15a25c)
+![73 pic](https://github.com/user-attachments/assets/96636d2c-3b7a-48ac-a959-73a8c79d87c0)
+![74 pic](https://github.com/user-attachments/assets/f8c79fc7-dba2-46cf-8437-a8e64a53ce46)
+![75 pic](https://github.com/user-attachments/assets/a5e4ba4e-8740-47be-858f-177bda76efba)
+
+Commands to load placement def in magic in another terminal
+
+![76 pic](https://github.com/user-attachments/assets/9eac715d-c9d2-4af2-9c39-d2f31b1ea012)
+
+placement def in magic
+![77 pic](https://github.com/user-attachments/assets/048de0a8-e978-4731-b7e4-9c705b4fdcb1)
+
+screenshot showing a custommade inverter placed correctly inside the chip layout, lined up neatly next to other cells
+![78 pic](https://github.com/user-attachments/assets/afb7918f-bb28-4387-8c48-a0ee9b6ba4a4)
+
+to view internal layers of cells:
+
+![79 pic](https://github.com/user-attachments/assets/5972d9da-26c4-43d9-a32e-6d964cd0f1a8)
+![80n pic](https://github.com/user-attachments/assets/994bf796-2228-4689-a429-b8f1c0d4e89f)
+
+### Do Post-Synthesis timing analysis with OpenSTA tool.
 
 Make timing ECO fixes to remove all violations.
 
