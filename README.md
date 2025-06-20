@@ -1,4 +1,4 @@
-![120pic](https://github.com/user-attachments/assets/02cef065-aec6-4211-85ab-78342ce1ef13)![119pic](https://github.com/user-attachments/assets/9ddcf628-f51d-474a-8bd0-9080d2e810f1)![118pic](https://github.com/user-attachments/assets/97ce7ea6-09b4-4709-96d6-f2ffa35f93bf)# Digital VLSI SoC Design and Planning
+# Digital VLSI SoC Design and Planning
 # VSDIAT Openlane Sky130 Workshop
 # Sky130 Day1- Inception of open-source EDA, OpenLANE and Sky130 PDK  
      
