@@ -213,7 +213,9 @@ command --help : shows the complete use that command
 
 clear : clears the terminal screen
 
+
 # LAB DAY 1
+
 ### 1.Run 'picorv32a' design synthesis using OpenLANE flow and generate necessary outputs.
  > SCREENSHOTS OF LAB ATTACHED BELOW.
 
@@ -225,15 +227,23 @@ clear : clears the terminal screen
 ![Capture 3](https://github.com/user-attachments/assets/bf645a79-1d9f-486e-ac31-5410a15e15a3)
 
 Flop ratio= no. of D flipflops/total no. of cells
-          = 1613/14876
-          = 0.1084296854
+
+ = 1613/14876
+ 
+ = 0.1084296854
+ 
 Percentage of DFF's =Flop ratio * 100
-                    = 0.1084296854*100
-                    = 10.84296854
+
+= 0.1084296854*100
+
+= 10.84296854
+
 
 
 # Sky130 Day 2 - Good floorplan vs bad floorplan and introduction to library cells
+
 ## Chip Floor planning considerations
+
 ## Utilization factor and aspect ratio
 ### 1.Define width and height of core and die.
 
@@ -376,13 +386,22 @@ We now place the netlist inside the core that was designed earlier and aim to fi
 ![Capture 7](https://github.com/user-attachments/assets/60e4a25f-d59f-4db6-9039-60903646d28e)
 
 Area of die in microns = Die width in microns * die height in microns
+
 1000 Unit Distance = 1 Micron
+
 Die width in unit Distance = 660685 - 0 = 660685
+
 Die height in unit Distance =671405 - 0 = 671405
+
 Distance in microns = Value in unit Distance / 1000
+
 Die width in microns = 660685 / 1000 = 660.685 Microns
+
 Die height in microns = 671405 / 1000 = 671.405 Microns
+
 Area of Die in microns = 660.685 × 671.405 = 443587.212425 Square Microns
+
+
 
 3.Load generated floorplan def in magic tool and explore the floorplan.
 
@@ -470,7 +489,10 @@ step 6: static timing analysis : to analyse what is setup time ,old time,what is
 
 one thing common accross all stages are gates or cells
 
+
+
 # LAB DAY 2 (BALANCE)
+
 5.Load generated placement def in magic tool and explore the placement.
 
 Commands used:
@@ -572,11 +594,13 @@ Even with the correct threshold value, negative delay can still happen if the wa
 Similarly, transition time (how quickly a signal changes) is calculated by subtracting the low threshold time (e.g., 20%) from the high threshold time (e.g., 80%).
 
 a. For a rising edge,Eqn:  slew_high_rise_thr - slew_low_rise_thr 
+
 b. for a falling edge, Eqn:  slew_high_fall_thr - slew_low_fall_thr.
 
 These calculations help us understand the speed and performance of a digital circuit. 
 
 ![image](https://github.com/user-attachments/assets/8769604d-9b00-43a3-8a28-f934fc31a4ca)
+
 
 
 # Sky130 Day 3 - Design library cell using Magic Layout and ngspice characterization
@@ -863,6 +887,7 @@ This second metal layer is thicker for carrying more current.Finally, we deposit
 ![image](https://github.com/user-attachments/assets/96720b9c-1376-4584-b625-bebc24733177)
 
 ![image](https://github.com/user-attachments/assets/28051df2-427f-4a7a-b15c-c9e088f24cf7)
+
 
 
 # LAB DAY 3
@@ -1174,7 +1199,7 @@ For proper hold timing, the combinational delay must be greater than the hold ti
 
  
 # LAB DAY 4
-### Fix up small DRC errors and verify the design is ready to be inserted into our flow.
+### 1. Fix up small DRC errors and verify the design is ready to be inserted into our flow.
 commands:
 
 ![50 pic](https://github.com/user-attachments/assets/6e2d808c-b64c-4213-8bd4-493dc2618911)
@@ -1199,7 +1224,7 @@ calculations:
 ### Width of Standard Cell: 1.77 um
 ### Height of Standard Cell: 3.28 um
 
-### Save the finalized layout with custom name and open it.
+### 2.Save the finalized layout with custom name and open it.
 ![53 1 pic](https://github.com/user-attachments/assets/933bbe29-1204-4abc-a683-d75e87979bbc)
 
 command to open newly opened layout:
@@ -1210,26 +1235,26 @@ new layout:
 
 ![55 pic](https://github.com/user-attachments/assets/5d961e89-8c0b-4a05-8924-0eb5c0be20ca)
 
-### Generate lef from the layout.
+### 3.Generate lef from the layout.
 command at tkon window:
 ![56 pic](https://github.com/user-attachments/assets/197faf93-785d-434b-97c0-cee3f0df1aff)
 
 newly created lef:
 ![57 pic](https://github.com/user-attachments/assets/96922d7c-618c-4f9f-b1d9-8a074db14a97)
 
-### Copy the newly generated lef and associated required lib files to 'picorv32a' design 'src' directory.
+### 4.Copy the newly generated lef and associated required lib files to 'picorv32a' design 'src' directory.
 commands:
 ![58 pic](https://github.com/user-attachments/assets/e9f08270-d3c5-41ef-b2ee-2b90c5b0b3fc)
 
-### Edit 'config.tcl' to change lib file and add the new extra lef into the openlane flow.
+### 5.Edit 'config.tcl' to change lib file and add the new extra lef into the openlane flow.
 ![59 pic](https://github.com/user-attachments/assets/8823c29c-b5da-422c-ba16-5d9c220e3f23)
 
-### Run openlane flow synthesis with newly inserted custom inverter cell.
+### 6.Run openlane flow synthesis with newly inserted custom inverter cell.
 ![60 pic](https://github.com/user-attachments/assets/ecc498fd-8645-407e-96cd-3949a557729d)
 ![61 pic](https://github.com/user-attachments/assets/3fbe3dee-a2ff-43ec-9217-366eba2acf99)
 ![63 pic](https://github.com/user-attachments/assets/b0be4e7e-9562-4fdc-a1b9-e661f28ebf5a)
 
-### Remove/reduce the newly introduced violations with the introduction of custom inverter cell by modifying design parameters.
+### 7.Remove/reduce the newly introduced violations with the introduction of custom inverter cell by modifying design parameters.
 ![62 pic](https://github.com/user-attachments/assets/336e62c2-9fc9-4486-af79-9f9d408dd245)
 ![63 pic](https://github.com/user-attachments/assets/b621bcae-06e0-407e-8933-52d0eeb12c8f)
 
@@ -1242,7 +1267,7 @@ commands to view and chnge parameters to improve timing and run synthesis:
 ![67 pic](https://github.com/user-attachments/assets/ea9f8dca-5043-4031-bc75-3c805e08fab6)
 ![68 pic](https://github.com/user-attachments/assets/d88971b5-6621-4ab1-b739-92a3290a730b)
 
-### Once synthesis has accepted our custom inverter we can now run floorplan and placement and verify the cell is accepted in PnR flow.
+### 8.Once synthesis has accepted our custom inverter we can now run floorplan and placement and verify the cell is accepted in PnR flow.
 ![69 pic](https://github.com/user-attachments/assets/dde79d92-925e-468e-acb7-afd43c73bfd7)
 ![70 pic](https://github.com/user-attachments/assets/4ad7393e-fbdd-4b87-8090-f66f1b630024)
 
@@ -1268,7 +1293,7 @@ to view internal layers of cells:
 ![79 pic](https://github.com/user-attachments/assets/5972d9da-26c4-43d9-a32e-6d964cd0f1a8)
 ![80n pic](https://github.com/user-attachments/assets/994bf796-2228-4689-a429-b8f1c0d4e89f)
 
-### Do Post-Synthesis timing analysis with OpenSTA tool.
+### 9.Do Post-Synthesis timing analysis with OpenSTA tool.
 
 ![81 pic](https://github.com/user-attachments/assets/0fce1ea0-e86d-4be3-ac91-85b580226adb)
 ![82 pic](https://github.com/user-attachments/assets/361a9fad-cf30-4643-8c5e-43ffa34e41d9)
@@ -1280,13 +1305,16 @@ Nwwly created pre_sta.conf for STA analysis in openlane directory
 Newly created my_base.sdc for STA analysis
 ![85PIC](https://github.com/user-attachments/assets/26b64ec0-0159-498f-b37b-a0fc8f43dc4b)
 
-Make timing ECO fixes to remove all violations.
+### 10.Make timing ECO fixes to remove all violations.
 
-Replace the old netlist with the new netlist generated after timing ECO fix and implement the floorplan, placement and cts.
+### 11.Replace the old netlist with the new netlist generated after timing ECO fix and implement the floorplan, placement and cts.
 
-Post-CTS OpenROAD timing analysis.
+###.Post-CTS OpenROAD timing analysis.
 
-Explore post-CTS OpenROAD timing analysis by removing 'sky130_fd_sc_hd__clkbuf_1' cell from clock buffer list variable 'CTS_CLK_BUFFER_LIST'.
+###.Explore post-CTS OpenROAD timing analysis by removing 'sky130_fd_sc_hd__clkbuf_1' cell from clock buffer list variable 'CTS_CLK_BUFFER_LIST'.
+
+
+
 
 # sky130 Day 5-final steps for RTL2GDS using tritonRoute and openSTA
 ## Routing and design rule check (DRC) 
