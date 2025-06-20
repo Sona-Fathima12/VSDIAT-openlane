@@ -1446,7 +1446,7 @@ To complete detaild routing efficiently, the algorithm calculates the cost of ea
 
  # LAB DAY 5
  
-### Perform generation of Power Distribution Network (PDN) and explore the PDN layout.
+### 1. Perform generation of Power Distribution Network (PDN) and explore the PDN layout.
 commands:
 ![86PIC](https://github.com/user-attachments/assets/354798d9-18ce-452e-bd47-7d616309320c)
 
@@ -1493,12 +1493,12 @@ output:
 ![97 PIC](https://github.com/user-attachments/assets/c107c138-e84a-4723-9b02-4c4e1275d338)
 ![98 PIC](https://github.com/user-attachments/assets/3c4bceb5-a9ea-4ec3-b0a9-41d303597fde)
 
-### Perfrom detailed routing using TritonRoute.
+### 2. Perfrom detailed routing using TritonRoute.
 ![99 PIC](https://github.com/user-attachments/assets/29ef5d91-d2a1-460f-8ac5-8dfd154b5d83)
 ![100 pic](https://github.com/user-attachments/assets/27f37209-5083-477a-a6b3-c1c50d9755eb)
 ![101 pic](https://github.com/user-attachments/assets/e9cade94-1faa-47d9-8da3-d26f4a761574)
 
-### Commands to load routed def in magic in another terminal
+### 3.Commands to load routed def in magic in another terminal
 ![102 pic](https://github.com/user-attachments/assets/d7862df3-23b2-4100-ad23-a8eb7aff6873)
 ![103 pic](https://github.com/user-attachments/assets/21886220-9267-4c17-a80e-0e22760ce2bb)
 ![104 pic](https://github.com/user-attachments/assets/f081d145-765c-4c81-a38c-ff2b388dcd0b)
@@ -1509,7 +1509,7 @@ fast route guide screenshot:
 ![107 pic](https://github.com/user-attachments/assets/a56fd24a-3463-4272-99dd-f01cdc2adf21)
 
 
-### Post-Route parasitic extraction using SPEF extractor.
+### 4.Post-Route parasitic extraction using SPEF extractor.
 Commands for SPEF extraction using external tool:
 
 cd Desktop/work/tools/openlane_working_dir/openlane/scripts/spef_extractor/
@@ -1519,7 +1519,7 @@ python3 main.py \-l /home/vsduser/Desktop/work/tools/openlane_working_dir/openla
 ![109 pic](https://github.com/user-attachments/assets/7a7dd60a-0c61-407e-bbf0-36503878effe)
 
 
-### Post-Route OpenSTA timing analysis with the extracted parasitics of the route.
+### 5.Post-Route OpenSTA timing analysis with the extracted parasitics of the route.
 ### Command to run OpenROAD tool
 openroad
 
