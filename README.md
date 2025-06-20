@@ -1270,6 +1270,16 @@ to view internal layers of cells:
 
 ### Do Post-Synthesis timing analysis with OpenSTA tool.
 
+![81 pic](https://github.com/user-attachments/assets/0fce1ea0-e86d-4be3-ac91-85b580226adb)
+![82 pic](https://github.com/user-attachments/assets/361a9fad-cf30-4643-8c5e-43ffa34e41d9)
+![83 pic](https://github.com/user-attachments/assets/01070ed3-de43-4de3-a05b-ce3fb3e1f6b1)
+
+Nwwly created pre_sta.conf for STA analysis in openlane directory
+![84PIC](https://github.com/user-attachments/assets/7312084e-f931-406d-8692-76964f1244eb)
+
+Newly created my_base.sdc for STA analysis
+![85PIC](https://github.com/user-attachments/assets/26b64ec0-0159-498f-b37b-a0fc8f43dc4b)
+
 Make timing ECO fixes to remove all violations.
 
 Replace the old netlist with the new netlist generated after timing ECO fix and implement the floorplan, placement and cts.
@@ -1364,8 +1374,128 @@ To complete detaild routing efficiently, the algorithm calculates the cost of ea
 
  # LAB DAY 5
  
+### Perform generation of Power Distribution Network (PDN) and explore the PDN layout.
+commands:
+![86PIC](https://github.com/user-attachments/assets/354798d9-18ce-452e-bd47-7d616309320c)
 
- ![1](https://github.com/user-attachments/assets/3ef94ba9-b0de-467d-b66b-09ecf543ea72)
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+
+add_lefs -src $lefs
+
+set ::env(SYNTH_STRATEGY) "DELAY 3"
+
+set ::env(SYNTH_SIZING) 1
+
+run_synthesis
+
+![87PIC](https://github.com/user-attachments/assets/872bb687-1fe3-4708-9555-3af39bed80d6)
+![88 PIC](https://github.com/user-attachments/assets/28c8fb78-2ed3-4792-a590-22c7cf55dfe3)
+
+init_floorplan
+
+place_io
+
+tap_decap_or
+
+![89 PIC](https://github.com/user-attachments/assets/9224d85f-badf-4ff2-9202-5eac70918cc5)
+
+run_placement
+
+![91 PIC](https://github.com/user-attachments/assets/8718749f-37e9-43c3-a0c2-efa70f347851)
+
+unset ::env(LIB_CTS)
+
+run_cts
+
+![92 PIC](https://github.com/user-attachments/assets/a6d33a94-af78-421a-980d-fa93c9dcdb1d)
+
+gen_pdn
+![93 PIC](https://github.com/user-attachments/assets/74f3d36b-4ae6-4e72-baff-42f40c119ee1)
+![94 PIC](https://github.com/user-attachments/assets/c5c141b3-8e57-4455-a166-14db7c692882)
+
+commads to load PDN def in magic:
+![95 PIC](https://github.com/user-attachments/assets/7ff48ab8-27c3-4c35-a320-2da3e8272093)
+
+output:
+![96 PIC](https://github.com/user-attachments/assets/fa4e7f9a-0499-45a2-b626-0f36f50fd96e)
+![97 PIC](https://github.com/user-attachments/assets/c107c138-e84a-4723-9b02-4c4e1275d338)
+![98 PIC](https://github.com/user-attachments/assets/3c4bceb5-a9ea-4ec3-b0a9-41d303597fde)
+
+### Perfrom detailed routing using TritonRoute.
+![99 PIC](https://github.com/user-attachments/assets/29ef5d91-d2a1-460f-8ac5-8dfd154b5d83)
+![100 pic](https://github.com/user-attachments/assets/27f37209-5083-477a-a6b3-c1c50d9755eb)
+![101 pic](https://github.com/user-attachments/assets/e9cade94-1faa-47d9-8da3-d26f4a761574)
+
+### Commands to load routed def in magic in another terminal
+![102 pic](https://github.com/user-attachments/assets/d7862df3-23b2-4100-ad23-a8eb7aff6873)
+![103 pic](https://github.com/user-attachments/assets/21886220-9267-4c17-a80e-0e22760ce2bb)
+![104 pic](https://github.com/user-attachments/assets/f081d145-765c-4c81-a38c-ff2b388dcd0b)
+![105 pic](https://github.com/user-attachments/assets/82b9a5e9-a633-4817-8c1e-ed971b04097f)
+![106 pic](https://github.com/user-attachments/assets/9003476d-19d1-4a48-b402-a3fa2bdc5c34)
+
+fast route guide screenshot:
+![107 pic](https://github.com/user-attachments/assets/a56fd24a-3463-4272-99dd-f01cdc2adf21)
+
+
+### Post-Route parasitic extraction using SPEF extractor.
+Commands for SPEF extraction using external tool:
+
+cd Desktop/work/tools/openlane_working_dir/openlane/scripts/spef_extractor/
+
+python3 main.py \-l /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/20-06_13-00/tmp/merged.lef \-d /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/20-06_13-00/results/routing/picorv32a.def
+
+![109 pic](https://github.com/user-attachments/assets/7a7dd60a-0c61-407e-bbf0-36503878effe)
+
+
+### Post-Route OpenSTA timing analysis with the extracted parasitics of the route.
+### Command to run OpenROAD tool
+openroad
+
+### Reading lef file
+read_lef /openLANE_flow/designs/picorv32a/runs/26-03_08-45/tmp/merged.lef
+
+### Reading def file
+read_def /openLANE_flow/designs/picorv32a/runs/26-03_08-45/results/routing/picorv32a.def
+
+### Creating an OpenROAD database to work with
+write_db pico_route.db
+
+### Loading the created database in OpenROAD
+read_db pico_route.db
+
+### Read netlist post CTS
+read_verilog /openLANE_flow/designs/picorv32a/runs/26-03_08-45/results/synthesis/picorv32a.synthesis_preroute.v
+
+### Read library for design
+read_liberty $::env(LIB_SYNTH_COMPLETE)
+
+### Link design and library
+link_design picorv32a
+
+### Read in the custom sdc we created
+read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
+
+### Setting all cloks as propagated clocks
+set_propagated_clock [all_clocks]
+
+### Read SPEF
+read_spef /openLANE_flow/designs/picorv32a/runs/26-03_08-45/results/routing/picorv32a.spef
+
+### Generating custom timing report
+report_checks -path_delay min_max -fields {slew trans net cap input_pins} -format full_clock_expanded -digits 4
+
+### Exit to OpenLANE flow
+exit
+
+![110 pic](https://github.com/user-attachments/assets/10706b86-c16a-4a42-ae55-2c53f6b8f356)
+![111 pic](https://github.com/user-attachments/assets/a5c1cf62-6d7c-497d-9dce-c5b8ffa87888)
+![112 pic](https://github.com/user-attachments/assets/b3c96b26-859d-4d67-b1c4-5c493fc47919)
+![113pic](https://github.com/user-attachments/assets/b2530b4a-ef78-406c-ba6b-c1a55ae4840f)
+![114pic](https://github.com/user-attachments/assets/99510d32-e9bc-478d-841c-63831f8c6149)
+
+
+
+
 
 ## Acknowledgements
 
