@@ -1,4 +1,4 @@
-# Digital VLSI SoC Design and Planning
+![120pic](https://github.com/user-attachments/assets/02cef065-aec6-4211-85ab-78342ce1ef13)![119pic](https://github.com/user-attachments/assets/9ddcf628-f51d-474a-8bd0-9080d2e810f1)![118pic](https://github.com/user-attachments/assets/97ce7ea6-09b4-4709-96d6-f2ffa35f93bf)# Digital VLSI SoC Design and Planning
 # VSDIAT Openlane Sky130 Workshop
 # Sky130 Day1- Inception of open-source EDA, OpenLANE and Sky130 PDK  
      
@@ -1305,10 +1305,54 @@ Nwwly created pre_sta.conf for STA analysis in openlane directory
 Newly created my_base.sdc for STA analysis
 ![85PIC](https://github.com/user-attachments/assets/26b64ec0-0159-498f-b37b-a0fc8f43dc4b)
 
+Commands to run STA in another termina
+![115 pic](https://github.com/user-attachments/assets/28a66e84-78ed-4d4f-ae9e-f18efd0ec79e)
+![116 pic](https://github.com/user-attachments/assets/dbb1db09-0861-4660-bcef-b9a96b262275)
+![117pic](https://github.com/user-attachments/assets/62fef49e-0d48-4dc9-b219-fa03cf02f2f0)
+
+Since more fanout is causing more delay we can  add parametr to reduce fanout and do synthesis again
+![118pic](https://github.com/user-attachments/assets/93dbe550-d5da-44d4-9318-b2e736140ef0)
+![119pic](https://github.com/user-attachments/assets/33b4dd17-aeed-4620-887f-c8175a996d02)
+
+Commands to run STA in another termina
+![120pic](https://github.com/user-attachments/assets/233141bf-17af-4f22-9de8-07bd8c1483b4)
+![121pic](https://github.com/user-attachments/assets/6e13535a-c2a6-429b-b2d8-7146efc9c243)
+![122pic](https://github.com/user-attachments/assets/6d0e8305-8e09-4f2e-9d74-cbf31a9e05ca)
+
 ### 10.Make timing ECO fixes to remove all violations.
+OR gate of drive strength 2 is driving  4 fanout
+![123pic](https://github.com/user-attachments/assets/326cd5b5-5f0e-4352-8bd2-05562de307a7)
+
+Commands to perform analysis and optimize timing by replacing with OR gate of drive strength 4
+![124pic](https://github.com/user-attachments/assets/88304136-5805-4ed5-90ee-916b825e7685)
+![125pic](https://github.com/user-attachments/assets/083cbba1-f2ab-4b29-a507-f25d4236e47f)
+![128pic](https://github.com/user-attachments/assets/7e72ebc6-cb6c-454e-999a-370428840432)
+
+Commands to perform analysis and optimize timing by replacing with OR gate of drive strength 4
+![129pic](https://github.com/user-attachments/assets/5ea320f0-f57f-4a1e-95a5-e00e67668f9f)
+![130pic](https://github.com/user-attachments/assets/5131ac0e-2dab-428a-9df7-637586936986)
+![131pic](https://github.com/user-attachments/assets/763ce382-a884-40c0-a604-eac5649cea13)
+
+Commands to perform analysis and optimize timing by replacing with OR gate of drive strength 4
+![132pic](https://github.com/user-attachments/assets/fd170bad-f31f-4545-a5dd-499629cc9313)
+![134pic](https://github.com/user-attachments/assets/08f489e0-7d42-4f1a-8d6a-51157446663a)
+![135pic](https://github.com/user-attachments/assets/e0bbc4d2-731b-4901-93ab-644c31a4cb5a)
+
+Commands to perform analysis and optimize timing by replacing with OR gate of drive strength 4
+
+![136pic](https://github.com/user-attachments/assets/3746fc91-ce88-4783-b0fa-76b5d22fe4b8)
+![137pic](https://github.com/user-attachments/assets/eda8146d-289b-43fb-87fb-cae767a38b9d)
+
+Commands to verify instance _14506_ is replaced with sky130_fd_sc_hd__or4_4
+
+report_checks -from _29043_ -to _30440_ -through _14506_
+
+![138pic](https://github.com/user-attachments/assets/14be0b93-4b24-4980-842b-8ab1b389a25e)
+
+
 
 ### 11.Replace the old netlist with the new netlist generated after timing ECO fix and implement the floorplan, placement and cts.
-
+![139pic](https://github.com/user-attachments/assets/071506c5-9573-4f5b-aba8-f1f0ec13151e)
 ###.Post-CTS OpenROAD timing analysis.
 
 ###.Explore post-CTS OpenROAD timing analysis by removing 'sky130_fd_sc_hd__clkbuf_1' cell from clock buffer list variable 'CTS_CLK_BUFFER_LIST'.
