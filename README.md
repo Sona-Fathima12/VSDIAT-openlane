@@ -1576,3 +1576,9 @@ Kunal Ghosh, Co-founder, VSD Corp. Pvt. Ltd.
 Nickson P Jose, Physical Design Engineer, Intel Corporation.R. 
 
 Timothy Edwards, Senior Vice President of Analog and Design, efabless Corporation.
+
+
+## Certificate
+
+<img width="1080" height="763" alt="image" src="https://github.com/user-attachments/assets/7935394f-1e28-401b-9195-cdeddf6b29b5" />
+
